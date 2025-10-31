@@ -30,7 +30,7 @@ const sf::Font& AssetManager::GetFont(const std::string& filename) {
     }
 
     sf::Font font;
-    if (!font.loadFromFile(filename)) {
+    if (!font.openFromFile(filename)) {
         std::cerr << "?? [AssetManager] Failed to load font: " << filename << std::endl;
     } else {
         std::cout << "? [AssetManager] Loaded font: " << filename << std::endl;
