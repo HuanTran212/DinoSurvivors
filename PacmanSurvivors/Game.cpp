@@ -2,7 +2,8 @@
 
 //Hàm tạo cửa sổ Game
 Game::Game()
-	: m_Window(sf::VideoMode({ 1280, 720 }), "Pacman Survivors")
+	: m_Window(sf::VideoMode({ 1280, 720 }), "Pacman Survivors"),
+	m_Player()
 {
 	m_Window.setFramerateLimit(60);
 }
@@ -32,13 +33,13 @@ void Game::ProcessInput()
 //Hàm cập nhật trạng thái game
 void Game::Update(float dt)
 {
-	
+	m_Player.update(dt);
 }
 
 //Hàm vẽ nội dung lên cửa sổ
 void Game::Render()
 {
 	m_Window.clear(sf::Color::Black);
-	
+	m_Player.draw(m_Window);
 	m_Window.display();
 }

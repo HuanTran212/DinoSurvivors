@@ -138,6 +138,12 @@
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PacmanSurvivors.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\images\pacman.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

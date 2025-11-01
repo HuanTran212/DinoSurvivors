@@ -1,4 +1,5 @@
-﻿#include <SFML/Graphics.hpp>
+﻿#include "Player.h"
+#include <SFML/Graphics.hpp>
 
 class Game
 {
@@ -13,4 +14,6 @@ private:
 
 	sf::RenderWindow m_Window;	//cửa sổ game
 	sf::Clock m_Clock;	//đồng hồ để tính delta time
+
+	Player m_Player;	//đối tượng người chơi
 };
