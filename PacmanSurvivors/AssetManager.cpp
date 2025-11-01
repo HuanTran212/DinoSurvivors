@@ -1,12 +1,12 @@
 #include "AssetManager.h"
 #include <iostream>
 
-AssetManager& AssetManager::GetInstance() {
+AssetManager& AssetManager::getInstance() {
     static AssetManager instance;
     return instance;
 }
 
-const sf::Texture& AssetManager::GetTexture(const std::string& filename) {
+const sf::Texture& AssetManager::getTexture(const std::string& filename) {
     auto it = m_textures.find(filename);
     if (it != m_textures.end()) {
         return it->second;
@@ -23,7 +23,7 @@ const sf::Texture& AssetManager::GetTexture(const std::string& filename) {
     return m_textures[filename];
 }
 
-const sf::Font& AssetManager::GetFont(const std::string& filename) {
+const sf::Font& AssetManager::getFont(const std::string& filename) {
     auto it = m_fonts.find(filename);
     if (it != m_fonts.end()) {
         return it->second;

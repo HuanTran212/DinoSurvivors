@@ -12,15 +12,15 @@ void Game::Run()
 {
 	while (m_Window.isOpen())
 	{
-		ProcessInput();
+		processInput();
 		float dt = m_Clock.restart().asSeconds();
-		Update(dt);
-		Render();
+		update(dt);
+		render();
 	}
 }
 
 //Hàm xử lý sự kiện đầu vào
-void Game::ProcessInput()
+void Game::processInput()
 {
 	while(auto event = m_Window.pollEvent())
 	{
@@ -30,15 +30,17 @@ void Game::ProcessInput()
 }
 
 //Hàm cập nhật trạng thái game
-void Game::Update(float dt)
+void Game::update(float dt)
 {
-	
+	m_Player.update(dt);
 }
 
 //Hàm vẽ nội dung lên cửa sổ
-void Game::Render()
+void Game::render()
 {
 	m_Window.clear(sf::Color::Black);
-	
+
+	m_Player.draw(m_Window);
+
 	m_Window.display();
 }

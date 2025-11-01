@@ -6,13 +6,13 @@
 class AssetManager {
 public:
     // Lay instance duy nhat (Singleton)
-    static AssetManager& GetInstance();
+    static AssetManager& getInstance();
 
     // Tai texture neu chua co, sau do tra ve reference
-    const sf::Texture& GetTexture(const std::string& filename);
+    const sf::Texture& getTexture(const std::string& filename);
 
     // Tai font neu chua co, sau do tra ve reference
-    const sf::Font& GetFont(const std::string& filename);
+    const sf::Font& getFont(const std::string& filename);
 
 private:
     AssetManager() = default; // Ham dung private
