@@ -1,13 +1,9 @@
 ﻿#include "Player.h"
+#include "AssetManager.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-Player::Player() :m_texture(), m_sprite(m_texture) {
-    if (!m_texture.loadFromFile("pacman.png")) {
-        std::cerr << "⚠️ Không thể tải ảnh pacman.png\n";
-    }
-
-    m_sprite.setTexture(m_texture);
+Player::Player() :m_sprite(AssetManager::getInstance().getTexture("pacman.png")), m_hp(3) {
     m_sprite.setPosition({ 400, 300 });
     m_speed = 200.0f;
 }
@@ -28,7 +24,7 @@ void Player::handleInput(float dt) {
 }
 
 void Player::update(float dt) {
-    // Hiện chưa có gì
+	handleInput(dt);
 }
 
 void Player::draw(sf::RenderWindow& window) {
