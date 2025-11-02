@@ -1,18 +1,26 @@
-﻿#include <SFML/Graphics.hpp>
+﻿#pragma once
+#include <SFML/Graphics.hpp>
+#include <vector>
+#include <memory>
+#include "IWeapon.h"
+#include "Projectile.h"
 
 class Player {
 private:
-	sf::Sprite m_sprite; // Hình ảnh đại diện cho người chơi
+    sf::Sprite m_sprite;
     float m_speed;
-	int m_hp;
+    int m_hp;
+    int m_xp;
+    std::vector<std::unique_ptr<IWeapon>> m_weapons;
 
 public:
-	Player(); //Hàm khởi tạo
-	void handleInput(float dt); // Xử lý đầu vào người chơi
-	void update(float dt); // Cập nhật trạng thái người chơi
-	void draw(sf::RenderWindow& window); // Vẽ người chơi lên cửa sổ
+    Player();
 
-	sf::Vector2f getPosition() const; // Lấy vị trí hiện tại của người chơi
-	int getHP() const; // Lấy điểm HP hiện tại của người chơi
+    void handleInput(float dt);
+    void update(float dt, std::vector<Projectile>& projectiles);
+    void draw(sf::RenderWindow& window);
+
+    void takeDamage(int damage);
+    int getHP();
 
 };

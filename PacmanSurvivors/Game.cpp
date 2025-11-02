@@ -32,11 +32,7 @@ void Game::processInput()
 //Hàm cập nhật trạng thái game
 void Game::update(float dt)
 {
-	m_Player.update(dt);
-	m_Player.getPosition();
-
-	sf::Vector2f playerPos = m_Player.getPosition();
-
+	m_Player.update(dt, m_projectiles);
 }
 
 //Hàm vẽ nội dung lên cửa sổ
