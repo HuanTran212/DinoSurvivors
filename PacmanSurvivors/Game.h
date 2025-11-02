@@ -1,7 +1,7 @@
 ﻿#include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "Ghost.h"
-#include "PelletShooter.h"
+#include "Projectile.h"
 
 
 class Game
@@ -22,7 +22,6 @@ private:
 
 	Ghost m_Ghost; //đối tượng con ma
 	
-	PelletShooter m_Weapon; //vũ khí bắn đạn
-	std::vector<Projectile> m_projectiles;
+	std::vector<Projectile> m_Projectiles;
 
 };

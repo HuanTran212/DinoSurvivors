@@ -3,7 +3,6 @@
 #include <vector>
 #include <memory>
 #include "IWeapon.h"
-#include "Projectile.h"
 
 class Player {
 private:
@@ -19,6 +18,7 @@ public:
     void handleInput(float dt);
     void update(float dt, std::vector<Projectile>& projectiles);
     void draw(sf::RenderWindow& window);
+	sf::Vector2f getPosition() const;
 
     void takeDamage(int damage);
     int getHP();

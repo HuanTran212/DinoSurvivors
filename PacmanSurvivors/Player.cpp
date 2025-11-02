@@ -36,6 +36,10 @@ void Player::draw(sf::RenderWindow& window) {
     window.draw(m_sprite);
 }
 
+sf::Vector2f Player::getPosition() const {
+    return m_sprite.getPosition();
+}
+
 int Player::getHP() {
     return m_hp;
 }
