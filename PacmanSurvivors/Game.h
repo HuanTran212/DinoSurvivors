@@ -1,6 +1,7 @@
 ﻿#include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "Ghost.h"
+#include "Projectile.h"
 
 
 class Game
@@ -20,4 +21,7 @@ private:
 	Player m_Player; //đối tượng người chơi
 
 	Ghost m_Ghost; //đối tượng con ma
+	
+	std::vector<Projectile> m_Projectiles;
+
 };
