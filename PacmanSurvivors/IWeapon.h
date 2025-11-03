@@ -6,6 +6,6 @@
 class IWeapon {
 public:
     virtual ~IWeapon() {}
-    virtual void Update(float dt, sf::Vector2f playerPos, std::vector<Projectile>& projectiles) = 0;
-    virtual void Draw(sf::RenderWindow& window) = 0;
+    virtual void update(float dt, sf::Vector2f playerPos, std::vector<Projectile>& Projectile) = 0;
+    virtual void draw(sf::RenderWindow& window) = 0;
 };

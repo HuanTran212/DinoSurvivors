@@ -9,6 +9,6 @@ private:
 
 public:
     PelletShooter();
-    void Update(float dt, sf::Vector2f playerPos, std::vector<Projectile>& projectiles) override;
-    void Draw(sf::RenderWindow& window) override;
+    void update(float dt, sf::Vector2f playerPos, std::vector<Projectile>& Projectile) override;
+    void draw(sf::RenderWindow& window) override;
 };

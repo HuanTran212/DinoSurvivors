@@ -1,8 +1,8 @@
-﻿#include <SFML/Graphics.hpp>
+﻿#pragma once
+#include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "Ghost.h"
 #include "Projectile.h"
-
 
 class Game
 {
@@ -23,5 +23,4 @@ private:
 	Ghost m_Ghost; //đối tượng con ma
 	
 	std::vector<Projectile> m_Projectiles;
-
 };

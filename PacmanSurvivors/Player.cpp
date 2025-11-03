@@ -63,6 +63,7 @@ Player::Player()
 
     m_animator->play("IDLE"); // Ban đầu đứng yên
     m_sprite.setPosition({ 640, 360 });
+    m_weapons.push_back(std::make_unique<PelletShooter>());
 }
 
 Player::~Player() {};
@@ -95,7 +96,7 @@ void Player::update(float dt, std::vector<Projectile>& projectiles) {
 
 	// Cập nhật vũ khí
     for (auto& weapon : m_weapons) {
-        weapon->Update(dt, m_sprite.getPosition(), projectiles);
+        weapon->update(dt, m_sprite.getPosition(), projectiles);
     }
 }
 
