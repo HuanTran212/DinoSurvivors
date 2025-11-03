@@ -56,11 +56,11 @@ Player::Player()
     }; // Thêm idle (đứng yên)
 
     // Thêm các animation vào Animator
-    m_animator->addAnimation("WALK_DOWN", walkDownFrames, 0.1f);
-    m_animator->addAnimation("WALK_UP", walkUpFrames, 0.1f);
-    m_animator->addAnimation("WALK_LEFT", walkLeftFrames, 0.1f);
-    m_animator->addAnimation("WALK_RIGHT", walkRightFrames, 0.1f);
-    m_animator->addAnimation("IDLE", idleFrames, 0.15f);
+    m_animator->addAnimation("WALK_DOWN", walkDownFrames, 0.15f);
+    m_animator->addAnimation("WALK_UP", walkUpFrames, 0.15f);
+    m_animator->addAnimation("WALK_LEFT", walkLeftFrames, 0.15f);
+    m_animator->addAnimation("WALK_RIGHT", walkRightFrames, 0.15f);
+    m_animator->addAnimation("IDLE", idleFrames, 0.25f);
 
     m_animator->play("IDLE"); // Ban đầu đứng yên
     m_sprite.setPosition({ 640, 360 });

@@ -2,7 +2,7 @@
 #include <iostream>
 
 PelletShooter::PelletShooter()
-    : m_fireRate(0.0f), m_fireTimer(1.0f)
+    : m_fireRate(1.2f), m_fireTimer(0.0f)
 {
 }
 
