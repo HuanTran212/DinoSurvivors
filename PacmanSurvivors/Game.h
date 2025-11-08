@@ -16,12 +16,12 @@ public:
     Game();
     // Hàm chạy chính
     void run();
-    // Hàm public để các State (như MainMenuState) gọi và đổi trạng thái
-	void changeState(std::unique_ptr<IGameState> newState);
 	//std::unique_ptr<IGameState>& getStatePtr();
     sf::RenderWindow& getWindow();
     UIManager& getUIManager();
-
+    void pushStates(std::unique_ptr<IGameState> newState);
+    void popStates();
+    IGameState* getCurrentState();
 private:
     // Các hàm vòng lặp game 
     void processInput(); // (Sẽ được state xử lý)
@@ -30,7 +30,7 @@ private:
     sf::RenderWindow m_window;
     sf::Clock m_clock;
     // Con trỏ thông minh quản lý trạng thái hiện tại
-    std::unique_ptr<IGameState> m_currentState;
+    std::vector<std::unique_ptr<IGameState>> m_currentState;
     // Con trỏ thông minh quản lý UIManager
     std::unique_ptr<UIManager> m_uiManager;
 };

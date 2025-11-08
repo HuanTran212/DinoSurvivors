@@ -1,4 +1,5 @@
 ﻿#include "PlayingState.h"
+#include "UpgradeState.h"
 #include "MainMenuState.h"
 #include "Game.h"
 
@@ -28,10 +29,10 @@ void PlayingState::update(float dt)
 	int xpGained = m_enemySpawner.update(dt, m_player.getPosition());
 	if (xpGained > 0)
 	{
-		int leveledUp = m_player.addXP(xpGained);
-		if (leveledUp > 0)
+		bool flap = m_player.addXP(xpGained);
+		if (flap)
 		{
-			// Chuyển sang trạng thái nâng cấp
+			m_game.pushStates(std::make_unique<UpgradeState>(m_game));
 		}
 	}
 
@@ -56,7 +57,6 @@ void PlayingState::update(float dt)
 
 void PlayingState::draw()
 {
-	m_game.getWindow().clear(sf::Color::Black);
 	m_player.draw(m_window);
 	for(auto& enemy : m_enemySpawner.getEnemies())
 	{
