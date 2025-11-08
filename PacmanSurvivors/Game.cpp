@@ -8,46 +8,43 @@ Game::Game()
     m_window.setFramerateLimit(60);
     m_window.setKeyRepeatEnabled(false);
     m_uiManager = std::make_unique<UIManager>();
-    m_currentState = std::make_unique<MainMenuState>(*this);
+    pushStates(std::make_unique<MainMenuState>(*this));
 }
 // Vòng lặp game chính
 void Game::run()
 {
     while (m_window.isOpen())
     {
-        if(m_currentState)
+		IGameState* currentState = getCurrentState();
+        if(currentState == nullptr)
         {
-            m_currentState->processInput(); // State tự xử lý input
+            m_window.close();
+            break;
 		}
-        float dt = m_clock.restart().asSeconds();
-        if (m_currentState)
+        currentState->processInput(); // State tự xử lý input
+        currentState = getCurrentState();
+        if (currentState == nullptr)
         {
-            m_currentState->update(dt);
+            m_window.close();
+            return;
         }
 
-        if (m_currentState)
+        if (currentState == nullptr)
         {
-           m_currentState->draw(); // State tự vẽ
+            m_window.close();
+            break;
+        }
+        float dt = m_clock.restart().asSeconds();
+        currentState->update(dt);
+		m_window.clear(sf::Color::Black);
+        for(auto& states : m_currentState)
+        {
+            currentState->draw(); // State tự vẽ
         }
         m_window.display();
     }
 }
 
-// Hàm thay đổi trạng thái
-void Game::changeState(std::unique_ptr<IGameState> newState)
-{
-    if (m_currentState)
-        std::cout << typeid(*m_currentState).name();
-    else
-        std::cout << "None";
-    std::cout << " -> To: " << typeid(*newState).name() << std::endl;
-    m_currentState = std::move(newState);
-}
-
-//std::unique_ptr<IGameState>& Game::getStatePtr()
-//{
-//	return m_currentState;
-//}
 
 sf::RenderWindow& Game::getWindow()
 {
@@ -57,6 +54,25 @@ sf::RenderWindow& Game::getWindow()
 UIManager& Game::getUIManager()
 {
     return *m_uiManager;
+}
+
+void Game::pushStates(std::unique_ptr<IGameState> newState)
+{
+    m_currentState.push_back(std::move(newState));
+}
+
+void Game::popStates()
+{
+    if (!m_currentState.empty())
+    {
+        m_currentState.pop_back();
+    }
+}
+
+IGameState* Game::getCurrentState()
+{
+    if (m_currentState.empty()) return nullptr;
+    return m_currentState.back().get();
 }
 
 void Game::processInput() { /* Logic đã được chuyển sang State */ }

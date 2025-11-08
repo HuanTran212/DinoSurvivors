@@ -44,7 +44,7 @@ void MainMenuState::processInput()
                 if (keyEvent->code == sf::Keyboard::Key::Enter)
                 {
 					m_startGame = true;
-                     m_game.changeState(std::make_unique<PlayingState>(m_game));
+                     m_game.pushStates(std::make_unique<PlayingState>(m_game));
                     return;
                 }
             }
@@ -59,7 +59,6 @@ void MainMenuState::update(float dt)
 
 void MainMenuState::draw()
 {
-	m_game.getWindow().clear(sf::Color::Black);
     m_game.getWindow().draw(m_titleText);
     m_game.getWindow().draw(m_pressStartText);
 }

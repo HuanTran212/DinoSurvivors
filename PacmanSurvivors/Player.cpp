@@ -153,16 +153,19 @@ int Player::getXPToNextLevel() const
     return xpToNextLevel;
 }
 
-int Player::addXP(int xpGained)
+bool Player::addXP(int xpGained)
 {
+	bool leveledUp = false;
 	int xpToNextLevel = getXPToNextLevel();
 	m_xp += xpGained;
 
-    if (m_xp >= xpToNextLevel)
+    while(m_xp >= xpToNextLevel)
     {
         m_xp -= xpToNextLevel;
+        xpToNextLevel = getXPToNextLevel();
         m_level++;
         std::cout << "Level Up! New Level: " << m_level << std::endl;
+		leveledUp = true;
 	}
-	return m_xp;
+	return leveledUp;
 }
