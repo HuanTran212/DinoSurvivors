@@ -32,7 +32,7 @@ void PlayingState::update(float dt)
 		bool flap = m_player.addXP(xpGained);
 		if (flap)
 		{
-			m_game.pushStates(std::make_unique<UpgradeState>(m_game));
+			m_game.pushStates(std::make_unique<UpgradeState>(m_game, m_player));
 		}
 	}
 

@@ -34,10 +34,11 @@ void UIManager::update(const Player& player)
 {
 	int xpToNextLevel = player.getXPToNextLevel();
 	int playerHP = player.getHP();
+	int playerMaxHP = player.getMaxHP();
 	int playerLevel = player.getLevel();
 	int playerXP = player.getXP();
     // Dùng std::to_string để chuyển số (int) thành chữ (string)
-    m_hpText.setString("HP: " + std::to_string(playerHP));
+    m_hpText.setString("HP: " + std::to_string(playerHP) + " / " + std::to_string(playerMaxHP));
     m_levelText.setString("LVL: " + std::to_string(playerLevel));
     m_xpText.setString("XP: " + std::to_string(playerXP) + " / " + std::to_string(xpToNextLevel));
 }

@@ -11,6 +11,7 @@ private:
     float m_speed;
 	int m_level;
     int m_hp;
+	int m_maxHP;
     int m_xp;
 
 	std::unique_ptr<Animator> m_animator;
@@ -27,10 +28,13 @@ public:
 	sf::Vector2f getPosition() const;
 	sf::FloatRect getBounds() const;
     int getHP() const;
+	int getMaxHP() const;
     int getLevel() const;
     int getXP() const;
     void takeDamage(int damage);
 	void addWeapon(std::unique_ptr<IWeapon> weapon);
 	int getXPToNextLevel() const;
 	bool addXP(int xpGainned);
+	void heal(int amount);
+	void addmaxHP(int amount);
 };

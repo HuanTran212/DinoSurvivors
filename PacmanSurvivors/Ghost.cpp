@@ -53,7 +53,7 @@ bool Ghost::isDead() const
 
 int Ghost::getCollisionDamage() const
 {
-    return 5;
+    return 30;
 }
 
 sf::Vector2f Ghost::getPosition() const

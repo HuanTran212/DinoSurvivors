@@ -8,6 +8,7 @@ Player::Player()
 	: m_sprite(AssetManager::getInstance().getTexture("Player.png")),
 	m_speed(200.f),
     m_hp(100),
+	m_maxHP(100),
 	m_xp(0),
     m_level(1)
 {
@@ -127,6 +128,11 @@ int Player::getHP() const
     return m_hp;
 }
 
+int Player::getMaxHP() const
+{
+    return m_maxHP;
+}
+
 int Player::getLevel() const
 {
 	return m_level;
@@ -139,7 +145,8 @@ int Player::getXP() const
 
 void Player::takeDamage(int damage) {
     m_hp -= damage;
-    std::cout << "Player took " << damage << " damage! HP = " << m_hp << std::endl;
+    if(m_hp < 0)
+		m_hp = 0;
 }
 
 void Player::addWeapon(std::unique_ptr<IWeapon> weapon)
@@ -168,4 +175,17 @@ bool Player::addXP(int xpGained)
 		leveledUp = true;
 	}
 	return leveledUp;
+}
+
+void Player::heal(int amount)
+{
+    m_hp += amount;
+    if(m_hp > m_maxHP)
+		m_hp = m_maxHP;
+}
+
+void Player::addmaxHP(int amount)
+{
+    m_maxHP += amount;
+	m_hp += amount; // Cũng hồi phục thêm tương ứng
 }

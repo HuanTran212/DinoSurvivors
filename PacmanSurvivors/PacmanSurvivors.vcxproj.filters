@@ -16,93 +16,138 @@
     <Filter Include="Assets">
       <UniqueIdentifier>{3f6da646-ce92-4f16-9a93-e11fb2c563df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Scenes">
+      <UniqueIdentifier>{7fd54825-405f-4377-84c0-0f3ee6e67994}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\High-Level">
+      <UniqueIdentifier>{606a6dc6-b6ca-46fb-a378-6a39b4bbf99c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scenes\Scene">
+      <UniqueIdentifier>{0107e30e-c9a8-4a5d-9474-c116c2262930}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes">
+      <UniqueIdentifier>{1b3804c2-c741-441f-bcc3-f254db76b189}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\High-Level">
+      <UniqueIdentifier>{214483b3-9dc1-469f-8bee-7858536ee5c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes\Scene">
+      <UniqueIdentifier>{dfafda07-21ab-47e1-85c2-06dee0bb6644}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes\Object">
+      <UniqueIdentifier>{874c56c7-c5f2-4219-97b6-064fa04a66c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes\Helper">
+      <UniqueIdentifier>{805fe531-a87d-4a19-b561-d474d5a90c4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scenes\Helper">
+      <UniqueIdentifier>{5e8b9761-48e6-43f0-a9b2-f366f7da9352}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scenes\Object">
+      <UniqueIdentifier>{50eb6d52-cc52-4273-a70b-82818c743402}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AssetManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Ghost.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Projecter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PelletShooter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Animator.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\High-Level</Filter>
     </ClCompile>
     <ClCompile Include="EnemySpawner.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Scenes\Object</Filter>
     </ClCompile>
-    <ClCompile Include="UIManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Scenes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>Source Files\Scenes\Object</Filter>
     </ClCompile>
     <ClCompile Include="MainMenuState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Scenes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PelletShooter.cpp">
+      <Filter>Source Files\Scenes\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Scenes\Object</Filter>
     </ClCompile>
     <ClCompile Include="PlayingState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Scenes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Projecter.cpp">
+      <Filter>Source Files\Scenes\Object</Filter>
     </ClCompile>
     <ClCompile Include="UpgradeState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Scenes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Source Files\Scenes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>Source Files\Scenes\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthUpgrade.cpp">
+      <Filter>Source Files\Scenes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="UpgradeManager.cpp">
+      <Filter>Source Files\Scenes\Helper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AssetManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Ghost.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IEnemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IWeapon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PelletShooter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Animator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemySpawner.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IGameState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UIManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\High-Level</Filter>
     </ClInclude>
     <ClInclude Include="MainMenuState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Scenes\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="PlayingState.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="UIManager.h">
+      <Filter>Header Files\Scenes\Scene</Filter>
     </ClInclude>
     <ClInclude Include="UpgradeState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Scenes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Scenes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManager.h">
+      <Filter>Header Files\Scenes\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpawner.h">
+      <Filter>Header Files\Scenes\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghost.h">
+      <Filter>Header Files\Scenes\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="IEnemy.h">
+      <Filter>Header Files\Scenes\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameState.h">
+      <Filter>Header Files\Scenes\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="IWeapon.h">
+      <Filter>Header Files\Scenes\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="PelletShooter.h">
+      <Filter>Header Files\Scenes\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Scenes\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayingState.h">
+      <Filter>Header Files\Scenes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Header Files\Scenes\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="IUpgrade.h">
+      <Filter>Header Files\Scenes\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthUpgrade.h">
+      <Filter>Header Files\Scenes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="UpgradeManager.h">
+      <Filter>Header Files\Scenes\Helper</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -135,6 +135,7 @@
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Ghost.cpp" />
+    <ClCompile Include="HealthUpgrade.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="PelletShooter.cpp" />
@@ -143,6 +144,7 @@
     <ClCompile Include="Projecter.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="UpgradeManager.cpp" />
     <ClCompile Include="UpgradeState.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,8 +153,10 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Ghost.h" />
     <ClInclude Include="EnemySpawner.h" />
+    <ClInclude Include="HealthUpgrade.h" />
     <ClInclude Include="IEnemy.h" />
     <ClInclude Include="IGameState.h" />
+    <ClInclude Include="IUpgrade.h" />
     <ClInclude Include="IWeapon.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="PelletShooter.h" />
@@ -160,6 +164,7 @@
     <ClInclude Include="PlayingState.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="UIManager.h" />
+    <ClInclude Include="UpgradeManager.h" />
     <ClInclude Include="UpgradeState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
