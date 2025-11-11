@@ -139,6 +139,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="PelletShooter.cpp" />
+    <ClCompile Include="Pinky.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayingState.cpp" />
     <ClCompile Include="Projectile.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="IWeapon.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="PelletShooter.h" />
+    <ClInclude Include="Pinky.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayingState.h" />
     <ClInclude Include="Projectile.h" />

@@ -93,6 +93,9 @@
     <ClCompile Include="Animator.cpp">
       <Filter>Source Files\High-Level</Filter>
     </ClCompile>
+    <ClCompile Include="Pinky.cpp">
+      <Filter>Source Files\Scenes\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h">
@@ -148,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="AssetManager.h">
       <Filter>Header Files\High-Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Pinky.h">
+      <Filter>Header Files\Scenes\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

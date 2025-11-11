@@ -6,7 +6,7 @@
 
 Player::Player()
 	: m_sprite(AssetManager::getInstance().getTexture("Idle.png")),
-	m_speed(200.f),
+	m_speed(180.f),
     m_hp(100),
 	m_maxHP(100),
 	m_xp(0),

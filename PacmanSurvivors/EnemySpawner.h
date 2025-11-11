@@ -5,14 +5,21 @@
 #include <cstdlib>
 #include "IEnemy.h"
 #include "Ghost.h"
+#include "Pinky.h"
+
+enum class EnemyType
+{
+    Ghost,
+    Pinky
+};
 
 struct SpawnRule
 {
+	EnemyType type; // Loại kẻ địch
     float interval; // Tần suất
     int count;      // Số lượng mỗi lần
     float timer;    // Đồng hồ nội bộ của quy tắc này
-    /*int enemyID;*/
-    SpawnRule(float i, int c) : interval(i), count(c), timer(0.f) {}
+    SpawnRule(EnemyType t, float i, int c) : type(t), interval(i), count(c), timer(0.f) {}
 };
 struct GameWave
 {
@@ -24,6 +31,7 @@ struct GameWave
 class EnemySpawner
 {
 private:
+	std::unique_ptr<IEnemy> createEnemy(EnemyType type, sf::Vector2f spawnPos);
     std::vector<std::unique_ptr<IEnemy>> m_enemies;
 	std::vector<GameWave> m_timeLine;
 public:

@@ -1,27 +1,27 @@
-﻿#include "Ghost.h"
+﻿#include "Pinky.h"
 #include "AssetManager.h"
 #include <cmath>
 
-Ghost::Ghost(sf::Vector2f spawnPos)
-    : m_sprite(AssetManager::getInstance().getTexture("Ghost.png")),
-    m_speed(100.0f),
+Pinky::Pinky(sf::Vector2f spawnPos)
+    : m_sprite(AssetManager::getInstance().getTexture("Pinky.png")),
+    m_speed(180.0f),
     m_velocity(0.f, 0.f),
     m_health(100.f)
 {
     m_sprite.setPosition(spawnPos);
 }
 
-void Ghost::update(float dt, sf::Vector2f playerPos)
+void Pinky::update(float dt, sf::Vector2f playerPos)
 {
-    sf::Vector2f ghostPos = m_sprite.getPosition();
-    sf::Vector2f direction = playerPos - ghostPos;
+    sf::Vector2f PinkyPos = m_sprite.getPosition();
+    sf::Vector2f direction = playerPos - PinkyPos;
 
     float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
     if (length != 0)
     {
-		direction /= length; // Chuẩn hóa vector hướng
+        direction /= length; // Chuẩn hóa vector hướng
         m_velocity = direction * m_speed;
-		m_sprite.move(m_velocity * dt);
+        m_sprite.move(m_velocity * dt);
     }
     else
     {
@@ -29,44 +29,44 @@ void Ghost::update(float dt, sf::Vector2f playerPos)
     }
 }
 
-void Ghost::draw(sf::RenderWindow& window)
+void Pinky::draw(sf::RenderWindow& window)
 {
     window.draw(m_sprite);
 }
 
-sf::FloatRect Ghost::getBounds() const
+sf::FloatRect Pinky::getBounds() const
 {
     return m_sprite.getGlobalBounds();
 }
 
-void Ghost::takeDamage(int damage)
+void Pinky::takeDamage(int damage)
 {
     m_health -= damage;
     if (m_health < 0.f)
         m_health = 0.f;
 }
 
-bool Ghost::isDead() const
+bool Pinky::isDead() const
 {
     return m_health <= 0.f;
 }
 
-int Ghost::getCollisionDamage() const
+int Pinky::getCollisionDamage() const
 {
-    return 20;
+    return 10;
 }
 
-sf::Vector2f Ghost::getPosition() const
+sf::Vector2f Pinky::getPosition() const
 {
     return m_sprite.getPosition();
 }
 
-void Ghost::setPosition(sf::Vector2f pos)
+void Pinky::setPosition(sf::Vector2f pos)
 {
     m_sprite.setPosition(pos);
 }
 
-void Ghost::applySeparation(const std::vector<std::unique_ptr<IEnemy>>& others)
+void Pinky::applySeparation(const std::vector<std::unique_ptr<IEnemy>>& others)
 {
     sf::Vector2f repel(0.f, 0.f);
     float desiredDistance = 40.f; // khoảng cách tối thiểu giữa quái
@@ -84,10 +84,10 @@ void Ghost::applySeparation(const std::vector<std::unique_ptr<IEnemy>>& others)
         }
     }
 
-    m_sprite.move(repel * 0.1f); // đẩy nhẹ ra
+    m_sprite.move(repel * 0.2f); // đẩy nhẹ ra
 }
 
-int Ghost::getXPReward() const
+int Pinky::getXPReward() const
 {
-    return 10;
+    return 15;
 }

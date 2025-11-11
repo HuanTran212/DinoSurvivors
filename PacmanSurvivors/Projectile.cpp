@@ -70,7 +70,7 @@ Projectile& Projectile::operator=(Projectile&& other) noexcept
 
 int Projectile::getDamage() const
 {
-	return 50;
+	return 35;
 }
 
 void Projectile::setDamage(int damage)

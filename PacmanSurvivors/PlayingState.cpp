@@ -31,6 +31,7 @@ void PlayingState::processInput()
 
 void PlayingState::update(float dt)
 {
+	m_totalTime += dt;
 	m_player.update(dt, m_Projectiles, m_enemySpawner.getEnemies());
 	int xpGained = m_enemySpawner.update(dt, m_player.getPosition(), m_totalTime);
 	if (xpGained > 0)
@@ -94,7 +95,7 @@ void PlayingState::checkCollisions()
 	    if (m_player.getBounds().findIntersection(enemy->getBounds()))
 	    {
 	        m_player.takeDamage(enemy->getCollisionDamage());
-	        enemy->takeDamage(1000); // Ma chết khi chạm vào Player
+	        enemy->takeDamage(10000000); // Ma chết khi chạm vào Player
 	    }
 		if (enemy->isDead()) continue;
 	     // 2. Va chạm Đạn - Ma
@@ -103,7 +104,7 @@ void PlayingState::checkCollisions()
 	        if (proj.getBounds().findIntersection(enemy->getBounds()))
 	        {
 	            enemy->takeDamage(proj.getDamage());
-	            proj.destroy(); // Đánh dấu đạn bị "hủy"
+	            proj.destroy();
 	        }
 	    }
 	 }

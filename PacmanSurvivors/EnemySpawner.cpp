@@ -1,29 +1,45 @@
 ﻿#include "EnemySpawner.h"
 #include "Ghost.h"
+#include "Pinky.h"
 #include <cmath>
+
+std::unique_ptr<IEnemy> EnemySpawner::createEnemy(EnemyType type, sf::Vector2f spawnPos)
+{
+    switch (type)
+    {
+    case EnemyType::Ghost:
+        return std::make_unique<Ghost>(spawnPos); // Tạo Ghost
+    case EnemyType::Pinky:
+        return std::make_unique<Pinky>(spawnPos); // Tạo Pinky
+    default:
+        // Mặc định an toàn
+        return std::make_unique<Ghost>(spawnPos);
+    }
+}
 EnemySpawner::EnemySpawner()
 	:m_timeLine()
 {
     // Giai đoạn 1: 0 - 30 giây
     GameWave wave1;
     wave1.startTime = 0.f;
-    wave1.endTime = 30.f;
-    wave1.rules.push_back(SpawnRule(2.0f, 1)); // 1 Ghost mỗi 2 giây
+    wave1.endTime = 10.f;
+    wave1.rules.push_back(SpawnRule(EnemyType::Ghost, 2.0f, 1)); // 1 Ghost mỗi 2 giây
 	m_timeLine.push_back(wave1);
 
     // Giai đoạn 2: 30 - 60 giây
     GameWave wave2;
-    wave2.startTime = 30.f;
-    wave2.endTime = 60.f;
-    wave2.rules.push_back(SpawnRule(1.0f, 1)); // 1 Ghost mỗi 1 giây
-    wave2.rules.push_back(SpawnRule(5.0f, 3)); // 3 Ghost mỗi 5 giây
+    wave2.startTime = 10.f;
+    wave2.endTime = 20.f;
+    wave2.rules.push_back(SpawnRule(EnemyType::Ghost, 3.0f, 2)); // 2 Ghost mỗi 3 giây
+    wave2.rules.push_back(SpawnRule(EnemyType::Pinky, 2.0f, 1)); // 1 Pinky mỗi 2 giây
 	m_timeLine.push_back(wave2);
 
     // Giai đoạn 3: 60 giây trở đi
     GameWave wave3;
-    wave3.startTime = 60.f;
+    wave3.startTime = 20.f;
     wave3.endTime = 9999.f;
-    wave3.rules.push_back(SpawnRule(0.5f, 2)); // 2 Ghost mỗi 0.5 giây
+    wave3.rules.push_back(SpawnRule(EnemyType::Ghost, 1.5f, 1)); // 1 Ghost mỗi 0.5 giây
+	wave3.rules.push_back(SpawnRule(EnemyType::Pinky, 5.0f, 3)); // 3 Pinky mỗi 4 giây
 	m_timeLine.push_back(wave3);
 }
 
@@ -51,7 +67,7 @@ int EnemySpawner::update(float dt, sf::Vector2f playerPosition, float totalGameT
                         float x = playerPosition.x + std::cos(angle) * distance;
                         float y = playerPosition.y + std::sin(angle) * distance;
 
-                        m_enemies.push_back(std::make_unique<Ghost>(sf::Vector2f(x, y)));
+                        m_enemies.push_back(createEnemy(rule.type, sf::Vector2f(x, y)));
                     }
                 }
             }
