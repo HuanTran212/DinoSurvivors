@@ -13,6 +13,8 @@ private:
     int m_hp;
 	int m_maxHP;
     int m_xp;
+	bool m_isHurt = false;
+	float m_hurtTimer = 0;
 
 	std::unique_ptr<Animator> m_animator;
 	sf::Vector2f m_lastDirection;

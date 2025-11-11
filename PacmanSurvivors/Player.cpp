@@ -22,6 +22,12 @@ Player::Player()
         // (i * 128, 0)
         idleFrames.emplace_back(sf::IntRect({ frameWidth * i, 0 }, { frameWidth, frameHeight }));
     }
+	std::vector<sf::IntRect> hurtFrames;
+    for (int i = 0; i < 4; ++i) // Lặp qua 4 frame
+    {
+        // (i * 128, 128)
+        hurtFrames.emplace_back(sf::IntRect({ frameWidth * i, frameHeight }, { frameWidth, frameHeight }));
+    }
     
     // Thêm các animation vào Animator
     m_animator->addAnimation("WALK_DOWN", idleFrames, 0.1f);
@@ -29,6 +35,7 @@ Player::Player()
     m_animator->addAnimation("WALK_LEFT", idleFrames, 0.1f);
     m_animator->addAnimation("WALK_RIGHT", idleFrames, 0.1f);
     m_animator->addAnimation("IDLE", idleFrames, 0.25f);
+	m_animator->addAnimation("HURT", hurtFrames, 0.1f);
     m_animator->play("IDLE"); // Ban đầu đứng yên
 	m_sprite.setOrigin({ frameWidth / 2.f, frameHeight / 2.f });
     m_sprite.setPosition({ 10000, 10000 });
@@ -54,34 +61,47 @@ void Player::processInput(float dt) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
         movement.x += m_speed * dt;
 
-	// Cập nhật animation dựa trên hướng di chuyển
-    if (movement.x > 0.f)
+    if(!m_isHurt)
     {
-        m_animator->play("WALK_RIGHT");
-        m_sprite.setScale({ 2.f, 2.f });
+        // Cập nhật animation dựa trên hướng di chuyển
+        if (movement.x > 0.f)
+        {
+            m_animator->play("WALK_RIGHT");
+            m_sprite.setScale({ 2.f, 2.f });
+        }
+        else if (movement.x < 0.f)
+        {
+            m_animator->play("WALK_LEFT");
+            m_sprite.setScale({ -2.f, 2.f });
+        }
+        else if (movement.y > 0.f)
+        {
+            m_animator->play("WALK_DOWN");
+        }
+        else if (movement.y < 0.f)
+        {
+            m_animator->play("WALK_UP");
+        }
+        else
+        {
+            m_animator->play("IDLE");
+        }
     }
-    else if (movement.x < 0.f)
-    {
-        m_animator->play("WALK_LEFT");
-        m_sprite.setScale({ -2.f, 2.f });
-    }
-    else if (movement.y > 0.f)
-    {
-        m_animator->play("WALK_DOWN");
-    }
-    else if (movement.y < 0.f)
-    {
-        m_animator->play("WALK_UP");
-    }
-    else
-    {
-        m_animator->play("IDLE");
-    }
+	
 
     m_sprite.move(movement);
 }
 
-void Player::update(float dt, std::vector<Projectile>& projectiles, const std::vector<std::unique_ptr<IEnemy>>& enemies) {
+void Player::update(float dt, std::vector<Projectile>& projectiles, const std::vector<std::unique_ptr<IEnemy>>& enemies)
+{
+    if (m_isHurt)
+    {
+        m_hurtTimer -= dt;
+        if (m_hurtTimer <= 0.f)
+        {
+            m_isHurt = false;
+        }
+    }
 	processInput(dt);
     m_animator->update(dt);
 
@@ -137,6 +157,11 @@ int Player::getXP() const
 }
 
 void Player::takeDamage(int damage) {
+    if(m_animator->play("HURT"), m_isHurt)
+		return; // Đang trong trạng thái bị thương, không nhận thêm sát thương
+	m_isHurt = true;
+	m_hurtTimer = 0.4; // Thời gian bất tử sau khi bị thương
+	m_animator->play("HURT");
     m_hp -= damage;
     if(m_hp < 0)
 		m_hp = 0;
