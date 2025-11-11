@@ -38,7 +38,7 @@ void PelletShooter::update(float dt,
         if (nearestEnemy)
         {
             // Bắn đạn về phía con ma GẦN NHẤT
-            const sf::Texture& bulletTex = AssetManager::getInstance().getTexture("pellet.png");
+            const sf::Texture& bulletTex = AssetManager::getInstance().getTexture("FireBall.png");
 
             sf::Vector2f direction = nearestEnemy->getPosition() - playerPos;
 
@@ -46,7 +46,7 @@ void PelletShooter::update(float dt,
             float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
             if (length != 0) direction /= length;
 
-            projectiles.push_back(Projectile(bulletTex, playerPos, direction, 400.f));
+            projectiles.emplace_back(Projectile(bulletTex, playerPos, direction, 400.f));
         }
         // (Nếu không có kẻ thù, súng sẽ không bắn)
     }

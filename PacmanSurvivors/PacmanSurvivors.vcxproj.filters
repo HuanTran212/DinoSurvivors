@@ -51,9 +51,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Animator.cpp">
-      <Filter>Source Files\High-Level</Filter>
-    </ClCompile>
     <ClCompile Include="EnemySpawner.cpp">
       <Filter>Source Files\Scenes\Object</Filter>
     </ClCompile>
@@ -75,7 +72,7 @@
     <ClCompile Include="PlayingState.cpp">
       <Filter>Source Files\Scenes\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Projecter.cpp">
+    <ClCompile Include="Projectile.cpp">
       <Filter>Source Files\Scenes\Object</Filter>
     </ClCompile>
     <ClCompile Include="UpgradeState.cpp">
@@ -84,13 +81,16 @@
     <ClCompile Include="UIManager.cpp">
       <Filter>Source Files\Scenes\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="AssetManager.cpp">
-      <Filter>Source Files\Scenes\Helper</Filter>
-    </ClCompile>
     <ClCompile Include="HealthUpgrade.cpp">
       <Filter>Source Files\Scenes\Scene</Filter>
     </ClCompile>
     <ClCompile Include="UpgradeManager.cpp">
+      <Filter>Source Files\Scenes\Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>Source Files\High-Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
       <Filter>Source Files\Scenes\Helper</Filter>
     </ClCompile>
   </ItemGroup>

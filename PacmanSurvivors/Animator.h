@@ -22,8 +22,9 @@ public:
     // Cập nhật logic animation (đây là phần DSA)
     void update(float dt);
 
+	void setSprite(sf::Sprite& sprite);
 private:
-    sf::Sprite& m_sprite; // Tham chiếu đến sprite của Player
+	sf::Sprite* m_sprite;
     float m_frameTime;
     float m_timer;
     int m_currentFrame;

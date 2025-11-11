@@ -1,7 +1,7 @@
 ﻿#include "Animator.h"
 
 Animator::Animator(sf::Sprite& sprite)
-	: m_sprite(sprite), m_frameTime(0.1f), m_timer(0.f), m_currentFrame(0), m_currentAnimation("")
+	: m_sprite(&sprite), m_frameTime(0.1f), m_timer(0.f), m_currentFrame(0), m_currentAnimation("")
 {
 }
 void Animator::addAnimation(const std::string& name, const std::vector<sf::IntRect>& frames, float frameTime)
@@ -11,7 +11,7 @@ void Animator::addAnimation(const std::string& name, const std::vector<sf::IntRe
 	{
 		m_currentAnimation = name;
 		m_frameTime = frameTime;
-		m_sprite.setTextureRect(m_animations[m_currentAnimation][0]);
+		m_sprite->setTextureRect(m_animations[m_currentAnimation][0]);
 	}
 }
 void Animator::play(const std::string& name)
@@ -21,7 +21,7 @@ void Animator::play(const std::string& name)
 		m_currentAnimation = name;
 		m_currentFrame = 0;
 		m_timer = 0.f;
-		m_sprite.setTextureRect(m_animations[m_currentAnimation][0]);
+		m_sprite->setTextureRect(m_animations[m_currentAnimation][0]);
 	}
 }
 
@@ -38,6 +38,11 @@ void Animator::update(float dt)
 		{
 			m_currentFrame = 0; //Trở về frame 0
 		}
-		m_sprite.setTextureRect(m_animations[m_currentAnimation][m_currentFrame]);
+		m_sprite->setTextureRect(m_animations[m_currentAnimation][m_currentFrame]);
 	}
+}
+
+void Animator::setSprite(sf::Sprite& sprite)
+{
+	m_sprite = &sprite;
 }

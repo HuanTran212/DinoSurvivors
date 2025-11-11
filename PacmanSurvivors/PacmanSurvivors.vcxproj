@@ -141,7 +141,7 @@
     <ClCompile Include="PelletShooter.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayingState.cpp" />
-    <ClCompile Include="Projecter.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="UpgradeManager.cpp" />

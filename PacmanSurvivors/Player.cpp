@@ -5,7 +5,7 @@
 #include "PelletShooter.h"
 
 Player::Player()
-	: m_sprite(AssetManager::getInstance().getTexture("Player.png")),
+	: m_sprite(AssetManager::getInstance().getTexture("Idle.png")),
 	m_speed(200.f),
     m_hp(100),
 	m_maxHP(100),
@@ -13,59 +13,26 @@ Player::Player()
     m_level(1)
 {
 	m_animator = std::make_unique<Animator>(m_sprite);
-
     // Kích thước của MỘT frame
-    int frameWidth = 256;
-    int frameHeight = 256;
-
-    // Hàng 1: Đi xuống (Y = 0)
-    std::vector<sf::IntRect> walkDownFrames = {
-        sf::IntRect({0, 0}, {frameWidth, frameHeight}),
-        sf::IntRect({frameWidth * 1, 0}, {frameWidth, frameHeight}), // (256, 0)
-        sf::IntRect({frameWidth * 2, 0}, {frameWidth, frameHeight}), // (512, 0)
-        //sf::IntRect({frameWidth * 3, 0}, {frameWidth, frameHeight})  // (768, 0)
-    };
-
-    // Hàng 2: Đi lên (Y = 256)
-    std::vector<sf::IntRect> walkUpFrames = {
-        sf::IntRect({0, frameHeight * 1}, {frameWidth, frameHeight}), // (0, 256)
-        sf::IntRect({frameWidth * 1, frameHeight * 1}, {frameWidth, frameHeight}), // (256, 256)
-        sf::IntRect({frameWidth * 2, frameHeight * 1}, {frameWidth, frameHeight}), // (512, 256)
-        sf::IntRect({frameWidth * 3, frameHeight * 1}, {frameWidth, frameHeight})  // (768, 256)
-    };
-
-    // Hàng 3: Đi trái (Y = 512)
-    std::vector<sf::IntRect> walkLeftFrames = {
-        sf::IntRect({0, frameHeight * 2}, {frameWidth, frameHeight}), // (0, 512)
-        sf::IntRect({frameWidth * 1, frameHeight * 2}, {frameWidth, frameHeight}), // (256, 512)
-        sf::IntRect({frameWidth * 2, frameHeight * 2}, {frameWidth, frameHeight}), // (512, 512)
-        sf::IntRect({frameWidth * 3, frameHeight * 2}, {frameWidth, frameHeight})  // (768, 512)
-    };
-
-    // Hàng 4: Đi phải (Y = 768)
-    std::vector<sf::IntRect> walkRightFrames = {
-        sf::IntRect({0, frameHeight * 3}, {frameWidth, frameHeight}), // (0, 768)
-        sf::IntRect({frameWidth * 1, frameHeight * 3}, {frameWidth, frameHeight}), // (256, 768)
-        sf::IntRect({frameWidth * 2, frameHeight * 3}, {frameWidth, frameHeight}), // (512, 768)
-        sf::IntRect({frameWidth * 3, frameHeight * 3}, {frameWidth, frameHeight})  // (768, 768)
-    };
-
-    std::vector<sf::IntRect> idleFrames = {
-        sf::IntRect({0,0}, {frameWidth, frameHeight}),
-        sf::IntRect({frameWidth * 1, 0}, {frameWidth, frameHeight}),
-        sf::IntRect({frameWidth * 2, 0}, {frameWidth, frameHeight}),
-        //sf::IntRect({frameWidth * 3, 0}, {frameWidth, frameHeight})
-    }; // Thêm idle (đứng yên)
-
+    int frameWidth = 128;
+    int frameHeight = 128;
+    std::vector<sf::IntRect> idleFrames;
+    for (int i = 0; i < 6; ++i) // Lặp qua 6 frame
+    {
+        // (i * 128, 0)
+        idleFrames.emplace_back(sf::IntRect({ frameWidth * i, 0 }, { frameWidth, frameHeight }));
+    }
+    
     // Thêm các animation vào Animator
-    m_animator->addAnimation("WALK_DOWN", walkDownFrames, 0.15f);
-    m_animator->addAnimation("WALK_UP", walkUpFrames, 0.15f);
-    m_animator->addAnimation("WALK_LEFT", walkLeftFrames, 0.15f);
-    m_animator->addAnimation("WALK_RIGHT", walkRightFrames, 0.15f);
+    m_animator->addAnimation("WALK_DOWN", idleFrames, 0.1f);
+    m_animator->addAnimation("WALK_UP", idleFrames, 0.1f);
+    m_animator->addAnimation("WALK_LEFT", idleFrames, 0.1f);
+    m_animator->addAnimation("WALK_RIGHT", idleFrames, 0.1f);
     m_animator->addAnimation("IDLE", idleFrames, 0.25f);
-
     m_animator->play("IDLE"); // Ban đầu đứng yên
+	m_sprite.setOrigin({ frameWidth / 2.f, frameHeight / 2.f });
     m_sprite.setPosition({ 640, 360 });
+	m_sprite.setScale({ 2.f, 2.f });
     m_weapons.push_back(std::make_unique<PelletShooter>());
 }
 
@@ -84,11 +51,28 @@ void Player::processInput(float dt) {
         movement.x += m_speed * dt;
 
 	// Cập nhật animation dựa trên hướng di chuyển
-    if (movement.x > 0.f) m_animator->play("WALK_RIGHT");
-    else if (movement.x < 0.f) m_animator->play("WALK_LEFT");
-    else if (movement.y > 0.f) m_animator->play("WALK_DOWN");
-    else if (movement.y < 0.f) m_animator->play("WALK_UP");
-    else m_animator->play("IDLE");
+    if (movement.x > 0.f)
+    {
+        m_animator->play("WALK_RIGHT");
+        m_sprite.setScale({ 2.f, 2.f });
+    }
+    else if (movement.x < 0.f)
+    {
+        m_animator->play("WALK_LEFT");
+        m_sprite.setScale({ -2.f, 2.f });
+    }
+    else if (movement.y > 0.f)
+    {
+        m_animator->play("WALK_DOWN");
+    }
+    else if (movement.y < 0.f)
+    {
+        m_animator->play("WALK_UP");
+    }
+    else
+    {
+        m_animator->play("IDLE");
+    }
 
     m_sprite.move(movement);
 }
@@ -114,11 +98,8 @@ sf::Vector2f Player::getPosition() const {
 sf::FloatRect Player::getBounds() const
 {
     sf::Vector2f pos = m_sprite.getPosition();
-    // Giả sử sprite của bạn có nhiều khoảng trống và
-    // nhân vật thật chỉ rộng 32x32 pixel ở giữa
-    // (Bạn sẽ cần điều chỉnh các con số 112, 112, 32, 32 cho phù hợp)
-    float left = pos.x + 112; // 112 = (256 - 32) / 2
-    float top = pos.y + 112;  // 112 = (256 - 32) / 2
+    float left = pos.x + 48;
+    float top = pos.y + 48;
     sf::FloatRect bounds({left, top} , { 32.f, 32.f});
     return bounds;
 }

@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include <SFML/Graphics.hpp>
+#include "Animator.h"
+#include <memory>
 
 class Projectile {
 private:
@@ -9,9 +11,12 @@ private:
     float m_speed;
 	int m_damage;
     bool m_isDestroyed;
+	std::unique_ptr<Animator> m_animator;
 public:
     Projectile(const sf::Texture& texture, sf::Vector2f playerPos, sf::Vector2f dir, float speed);
-	int getDamage() const;
+	Projectile(Projectile&& other) noexcept;
+	Projectile& operator=(Projectile&& other) noexcept;
+    int getDamage() const;
 	void setDamage(int damage);
     void update(float dt);
     void draw(sf::RenderWindow& window);
