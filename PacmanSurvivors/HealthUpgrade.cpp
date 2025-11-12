@@ -11,6 +11,6 @@ void HealthUpgrade::applyUpgrade(Player& player)
 }
 std::string HealthUpgrade::getName() const
 {
-	return "(1) Tang 10 mau toi da";
+	return "Tang 10 mau toi da";
 }
 

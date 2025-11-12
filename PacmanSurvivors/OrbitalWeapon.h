@@ -16,6 +16,7 @@ public:
         const std::vector<std::unique_ptr<IEnemy>>& enemies) override;
 
     void draw(sf::RenderWindow& window) override;
+	float getKnockbackDirection() const;
 private:
     std::vector<std::unique_ptr<Animator>> m_orbs;
     std::vector<sf::Sprite> m_orbSprites;
@@ -27,4 +28,5 @@ private:
     int m_damage;
     float m_damageCooldown; // Thời gian giãn cách giữa các lần gây sát thương
     float m_damageTimer;
+	float m_knockbackForce;
 };

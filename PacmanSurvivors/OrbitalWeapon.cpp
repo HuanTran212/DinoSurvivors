@@ -4,11 +4,12 @@
 
 OrbitalWeapon::OrbitalWeapon()
     : m_angle(0.f),
-    m_radius(150.f), // Quay ở bán kính 100 pixel
+    m_radius(160.f), // Quay ở bán kính 160 pixel
     m_orbCount(3),     // Bắt đầu với 3 quả cầu
-    m_damage(25),
+    m_damage(30),
     m_damageCooldown(1.0f), // Mỗi quả cầu chỉ gây sát thương 1 lần/giây
-    m_damageTimer(0.f)
+    m_damageTimer(0.f),
+    m_knockbackForce(120.f)
 {
     const sf::Texture& tex = AssetManager::getInstance().getTexture("Suriken.png");
     m_orbSprites.reserve(m_orbCount);
@@ -74,6 +75,11 @@ void OrbitalWeapon::update(float dt,
                 if (orbBounds.findIntersection(enemy->getBounds()))
                 {
                     enemy->takeDamage(m_damage);
+					// Áp dụng knockback
+					sf::Vector2f knockbackDir = enemy->getPosition() - playerPos;
+					float length = std::sqrt(knockbackDir.x * knockbackDir.x + knockbackDir.y * knockbackDir.y);
+					if (length > 0) knockbackDir /= length;
+					enemy->applyKnockback(knockbackDir, m_knockbackForce);
                 }
             }
         }
@@ -88,8 +94,13 @@ void OrbitalWeapon::update(float dt,
 void OrbitalWeapon::draw(sf::RenderWindow& window)
 {
     // Vẽ từng quả cầu
-    for (auto& orb : m_orbs)
+	for (auto& orb : m_orbs)
     {
         window.draw(orb->getSprite());
     }
+}
+
+float OrbitalWeapon::getKnockbackDirection() const
+{
+    return m_knockbackForce;
 }

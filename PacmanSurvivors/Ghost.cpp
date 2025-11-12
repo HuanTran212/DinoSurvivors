@@ -6,27 +6,44 @@ Ghost::Ghost(sf::Vector2f spawnPos)
     : m_sprite(AssetManager::getInstance().getTexture("Ghost.png")),
     m_speed(100.0f),
     m_velocity(0.f, 0.f),
-    m_health(100.f)
+    m_health(100.f),
+	m_knockbackVelocity(0.f, 0.f),
+	m_isKnockBack(false)
 {
     m_sprite.setPosition(spawnPos);
 }
 
 void Ghost::update(float dt, sf::Vector2f playerPos)
 {
-    sf::Vector2f ghostPos = m_sprite.getPosition();
-    sf::Vector2f direction = playerPos - ghostPos;
-
-    float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
-    if (length != 0)
+    if (m_isKnockBack)
     {
-		direction /= length; // Chuẩn hóa vector hướng
-        m_velocity = direction * m_speed;
-		m_sprite.move(m_velocity * dt);
+        m_sprite.move(m_knockbackVelocity * dt);
+		m_knockbackVelocity *= 0.8f; // Giảm dần knockback theo thời gian
+		if (std::abs(m_knockbackVelocity.x) < 0.1f && std::abs(m_knockbackVelocity.y) < 0.1f)
+        {
+            m_knockbackVelocity = sf::Vector2f(0.f, 0.f);
+            m_isKnockBack = false;
+        }
     }
     else
     {
-        m_velocity = sf::Vector2f(0.f, 0.f);
+        sf::Vector2f ghostPos = m_sprite.getPosition();
+        sf::Vector2f direction = playerPos - ghostPos;
+        float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+        if (length != 0)
+        {
+            direction /= length; // Chuẩn hóa vector hướng
+            m_velocity = direction * m_speed;
+            m_sprite.move((m_velocity)*dt);
+        }
+        else
+        {
+            m_velocity = sf::Vector2f(0.f, 0.f);
+        }
     }
+    
+
+
 }
 
 void Ghost::draw(sf::RenderWindow& window)
@@ -90,4 +107,10 @@ void Ghost::applySeparation(const std::vector<std::unique_ptr<IEnemy>>& others)
 int Ghost::getXPReward() const
 {
     return 10;
+}
+
+void Ghost::applyKnockback(sf::Vector2f direction, float force)
+{
+	m_knockbackVelocity += direction * force;
+	m_isKnockBack = true;
 }

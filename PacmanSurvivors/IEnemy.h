@@ -32,4 +32,6 @@ public:
 
 	// Lấy điểm kinh nghiệm thưởng khi bị tiêu diệt
 	virtual int getXPReward() const = 0;
+
+	virtual void applyKnockback(sf::Vector2f direction, float force) = 0;
 };

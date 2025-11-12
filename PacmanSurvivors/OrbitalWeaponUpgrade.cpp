@@ -1,5 +1,6 @@
 #include "OrbitalWeaponUpgrade.h"
 #include "OrbitalWeapon.h"
+#include <memory>
 OrbitalWeaponUpgrade::OrbitalWeaponUpgrade()
 {
 }

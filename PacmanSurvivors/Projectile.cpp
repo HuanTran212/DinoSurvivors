@@ -2,7 +2,13 @@
 #include <cmath>
 
 Projectile::Projectile(const sf::Texture& texture, sf::Vector2f playerPos, sf::Vector2f dir, float speed)
-	:m_sprite(texture), m_direction(dir), m_velocity(0.f, 0.f), m_speed(speed), m_damage(10), m_isDestroyed(false)
+	:m_sprite(texture), 
+	m_direction(dir), 
+	m_velocity(0.f, 0.f), 
+	m_speed(speed), 
+	m_damage(35), 
+	m_isDestroyed(false),
+	m_knockbackForce(150.f)
 {
 	m_sprite.setPosition(playerPos);
 	m_sprite.setScale({ 2.f, 2.f });
@@ -43,6 +49,7 @@ Projectile::Projectile(Projectile&& other) noexcept
 	m_speed(other.m_speed),
 	m_damage(other.m_damage),
 	m_isDestroyed(other.m_isDestroyed),
+	m_knockbackForce(other.m_knockbackForce),
 	m_animator(std::move(other.m_animator))
 {
 	if (m_animator) {
@@ -60,6 +67,7 @@ Projectile& Projectile::operator=(Projectile&& other) noexcept
 		m_speed = other.m_speed;
 		m_damage = other.m_damage;
 		m_isDestroyed = other.m_isDestroyed;
+		m_knockbackForce = other.m_knockbackForce;
 		m_animator = std::move(other.m_animator);
 		if (m_animator) {
 			m_animator->setSprite(m_sprite);
@@ -108,4 +116,13 @@ sf::Vector2f Projectile::getPosition() const{
 
 sf::FloatRect Projectile::getBounds() const{
 	return m_sprite.getGlobalBounds();
+}
+
+float Projectile::getKnockbackForce() const
+{
+	return m_knockbackForce;
+}
+sf::Vector2f Projectile::getDirection() const
+{
+	return m_velocity;
 }

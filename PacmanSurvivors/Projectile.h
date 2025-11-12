@@ -9,19 +9,22 @@ private:
     sf::Vector2f m_direction;
     sf::Vector2f m_velocity;
     float m_speed;
-	int m_damage;
+    int m_damage;
     bool m_isDestroyed;
-	std::unique_ptr<Animator> m_animator;
+    std::unique_ptr<Animator> m_animator;
+    float m_knockbackForce;
 public:
     Projectile(const sf::Texture& texture, sf::Vector2f playerPos, sf::Vector2f dir, float speed);
-	Projectile(Projectile&& other) noexcept;
-	Projectile& operator=(Projectile&& other) noexcept;
+    Projectile(Projectile&& other) noexcept;
+    Projectile& operator=(Projectile&& other) noexcept;
     int getDamage() const;
-	void setDamage(int damage);
+    void setDamage(int damage);
     void update(float dt);
     void draw(sf::RenderWindow& window);
-	void destroy();
+    void destroy();
     bool isDestroyed() const;
     sf::Vector2f getPosition() const;
     sf::FloatRect getBounds() const;
+    float getKnockbackForce() const;
+    sf::Vector2f getDirection() const;
 };

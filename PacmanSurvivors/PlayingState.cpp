@@ -104,6 +104,7 @@ void PlayingState::checkCollisions()
 	        if (proj.getBounds().findIntersection(enemy->getBounds()))
 	        {
 	            enemy->takeDamage(proj.getDamage());
+				enemy->applyKnockback(proj.getDirection(), proj.getKnockbackForce());
 	            proj.destroy();
 	        }
 	    }

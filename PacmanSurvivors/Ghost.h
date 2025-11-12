@@ -9,7 +9,8 @@ private:
     float m_speed;
     sf::Vector2f m_velocity;
     float m_health; // để dùng với TakeDamage và IsDead
-
+	sf::Vector2f m_knockbackVelocity;
+    bool m_isKnockBack;
 public:
     Ghost(sf::Vector2f spawnPos = { 300.f, 400.f });
 
@@ -23,4 +24,5 @@ public:
     void setPosition(sf::Vector2f pos);
 	void applySeparation(const std::vector<std::unique_ptr<IEnemy>>& others);
 	int getXPReward() const override;
+	void applyKnockback(sf::Vector2f direction, float force) override;
 };
