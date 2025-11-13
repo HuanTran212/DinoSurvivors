@@ -23,6 +23,7 @@ public:
     void popStates();
     IGameState* getCurrentState();
 	sf::View& getWorldView();
+    void replaceAllStates(std::unique_ptr<IGameState> newState);
 private:
     // Các hàm vòng lặp game 
     void processInput(); // (Sẽ được state xử lý)

@@ -25,7 +25,7 @@ UpgradeState::UpgradeState(Game& game, Player& player) :
 
 	m_overlay.setSize(windowSize);
 	m_overlay.setPosition({0.f, 0.f});
-	m_overlay.setFillColor(sf::Color(0, 0, 0, 55));
+	m_overlay.setFillColor(sf::Color(0, 0, 0, 150));
 
 	m_currentUpgrades = UpgradeManager::getInstance().getRandomUpgrades(3);
 

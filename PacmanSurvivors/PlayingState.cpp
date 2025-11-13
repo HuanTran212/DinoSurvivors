@@ -1,6 +1,7 @@
 ﻿#include "PlayingState.h"
 #include "UpgradeState.h"
 #include "MainMenuState.h"
+#include "GameOverState.h"
 #include "Game.h"
 
 PlayingState::PlayingState(Game& game) :
@@ -45,6 +46,11 @@ void PlayingState::update(float dt)
 			}
 		}
 
+	}
+	if (m_player.getHP() <= 0)
+	{
+		m_game.replaceAllStates(std::make_unique<GameOverState>(m_game, m_player.getLevel()));
+		return;
 	}
 
 	for (auto& proj : m_Projectiles)

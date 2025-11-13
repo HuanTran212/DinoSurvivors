@@ -41,13 +41,13 @@ void Game::run()
 		m_window.setView(m_worldView);
         for(auto& states : m_currentState)
         {
-            currentState->drawWorld(); // State tự vẽ
+            states->drawWorld(); // State tự vẽ
 		}
 
 		m_window.setView(m_window.getDefaultView());
         for(auto& states : m_currentState)
         {
-            currentState->drawUI(); // State tự vẽ
+            states->drawUI(); // State tự vẽ
         }
         m_window.display();
     }
@@ -86,6 +86,12 @@ IGameState* Game::getCurrentState()
 sf::View& Game::getWorldView()
 {
 	return m_worldView;
+}
+
+void Game::replaceAllStates(std::unique_ptr<IGameState> newState)
+{
+    m_currentState.clear();
+	m_currentState.push_back(std::move(newState));
 }
 
 void Game::processInput() { /* Logic đã được chuyển sang State */ }

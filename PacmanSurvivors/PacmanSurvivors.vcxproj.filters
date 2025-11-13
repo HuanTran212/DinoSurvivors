@@ -144,6 +144,9 @@
     <ClCompile Include="PelletShooterUpgrade.cpp">
       <Filter>Source Files\Scenes\Scene\Upgrade</Filter>
     </ClCompile>
+    <ClCompile Include="GameOverState.cpp">
+      <Filter>Source Files\Scenes\Scene\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h">
@@ -214,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="PelletShooterUpgrade.h">
       <Filter>Header Files\Scenes\Scene\Upgrade</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverState.h">
+      <Filter>Header Files\Scenes\Scene\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

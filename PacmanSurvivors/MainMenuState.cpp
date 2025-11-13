@@ -44,7 +44,7 @@ void MainMenuState::processInput()
                 if (keyEvent->code == sf::Keyboard::Key::Enter)
                 {
 					m_startGame = true;
-                     m_game.pushStates(std::make_unique<PlayingState>(m_game));
+                    m_game.replaceAllStates(std::make_unique<PlayingState>(m_game));
                     return;
                 }
             }
