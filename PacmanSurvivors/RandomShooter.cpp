@@ -37,7 +37,6 @@ void RandomShooter::update(float dt,
         Projectile newProj(bulletTex, playerPos, direction, 400.f, 16, 16, 4);
         projectiles.emplace_back(std::move(newProj));
         m_fireTimer = 0.f;
-        std::cout << "RandomShooter fired!" << std::endl;
     }
 }
 

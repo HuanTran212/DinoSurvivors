@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="PelletShooterUpgrade.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="HealthUpgrade.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="IUpgrade.h" />
     <ClInclude Include="IWeapon.h" />
     <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="PelletShooterUpgrade.h" />
     <ClInclude Include="OrbitalWeapon.h" />
     <ClInclude Include="PelletShooter.h" />
     <ClInclude Include="Pinky.h" />

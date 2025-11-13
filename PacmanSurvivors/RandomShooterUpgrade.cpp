@@ -12,5 +12,5 @@ void RandomShooterUpgrade::applyUpgrade(Player& player)
 }
 std::string RandomShooterUpgrade::getName() const
 {
-	return "Random Shooter Upgrade";
+	return "Random Shooter";
 }

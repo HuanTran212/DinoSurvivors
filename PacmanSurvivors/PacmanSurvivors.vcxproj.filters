@@ -141,6 +141,9 @@
     <ClCompile Include="RandomShooterUpgrade.cpp">
       <Filter>Source Files\Scenes\Scene\Upgrade</Filter>
     </ClCompile>
+    <ClCompile Include="PelletShooterUpgrade.cpp">
+      <Filter>Source Files\Scenes\Scene\Upgrade</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h">
@@ -207,6 +210,9 @@
       <Filter>Header Files\Scenes\Object\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="RandomShooterUpgrade.h">
+      <Filter>Header Files\Scenes\Scene\Upgrade</Filter>
+    </ClInclude>
+    <ClInclude Include="PelletShooterUpgrade.h">
       <Filter>Header Files\Scenes\Scene\Upgrade</Filter>
     </ClInclude>
   </ItemGroup>
