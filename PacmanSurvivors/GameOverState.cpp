@@ -12,6 +12,8 @@ GameOverState::GameOverState(Game& game, int finalLevel)
 	m_restartText(AssetManager::getInstance().getFont("pixel.ttf")),
     m_font(AssetManager::getInstance().getFont("pixel.ttf"))
 {
+	SoundManager::getInstance().stopMusic();
+	SoundManager::getInstance().playMusic("GameOver.wav");
     sf::Vector2f windowSize = (sf::Vector2f)m_game.getWindow().getSize();
 
     // 1. Lớp phủ màu ĐỎ mờ (Máu me một chút)
