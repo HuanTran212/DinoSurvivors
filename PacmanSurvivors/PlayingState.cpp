@@ -12,9 +12,10 @@ PlayingState::PlayingState(Game& game) :
 	m_totalTime(0.f),
 	m_backgroundSprite(AssetManager::getInstance().getTexture("map.png"))
 {
-	const sf::Texture& bgTex = AssetManager::getInstance().getTexture("map.png");
-	const_cast<sf::Texture&>(bgTex).setRepeated(true);
-	m_backgroundSprite.setTexture(bgTex);
+	SoundManager::getInstance().stopMusic();
+	SoundManager::getInstance().playMusic("GamePlay.ogg");
+	const_cast<sf::Texture&>(m_backgroundSprite.getTexture()).setRepeated(true);
+	m_backgroundSprite.setTexture((m_backgroundSprite.getTexture()));
 	m_backgroundSprite.setTextureRect(sf::IntRect({ -100000, -100000 }, { 200000, 200000 }));
 }
 

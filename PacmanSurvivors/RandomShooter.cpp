@@ -32,6 +32,7 @@ void RandomShooter::update(float dt,
 
         // 3. Bắn về phía kẻ thù đó
         const sf::Texture& bulletTex = AssetManager::getInstance().getTexture("Random.png");
+        SoundManager::getInstance().playSound("PewPew.wav", 0.1f);
         sf::Vector2f direction = randomEnemy->getPosition() - playerPos;
 
         Projectile newProj(bulletTex, playerPos, direction, 400.f, 16, 16, 4);

@@ -66,7 +66,7 @@ UIManager& Game::getUIManager()
 
 void Game::pushStates(std::unique_ptr<IGameState> newState)
 {
-    m_currentState.push_back(std::move(newState));
+    m_currentState.emplace_back(std::move(newState));
 }
 
 void Game::popStates()
@@ -91,7 +91,7 @@ sf::View& Game::getWorldView()
 void Game::replaceAllStates(std::unique_ptr<IGameState> newState)
 {
     m_currentState.clear();
-	m_currentState.push_back(std::move(newState));
+	m_currentState.emplace_back(std::move(newState));
 }
 
 void Game::processInput() { /* Logic đã được chuyển sang State */ }

@@ -147,6 +147,9 @@
     <ClCompile Include="GameOverState.cpp">
       <Filter>Source Files\Scenes\Scene\States</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Source Files\High-Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h">
@@ -220,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="GameOverState.h">
       <Filter>Header Files\Scenes\Scene\States</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Header Files\High-Level</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@ MainMenuState::MainMenuState(Game& game)
     m_titleText(m_font),
 	m_pressStartText(m_font)
 {
+	SoundManager::getInstance().playMusic("Background_Music.ogg");
 	sf::Vector2u windowSize = m_game.getWindow().getSize();
 
     m_titleText.setFont(m_font);

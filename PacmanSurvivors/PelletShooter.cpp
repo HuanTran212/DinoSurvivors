@@ -47,6 +47,7 @@ void PelletShooter::update(float dt,
             if (length != 0) direction /= length;
 
             projectiles.emplace_back(Projectile(bulletTex, playerPos, direction, 400.f, 32, 16, 4));
+			SoundManager::getInstance().playSound("FireBall.wav", 0.3f);
         }
         // (Nếu không có kẻ thù, súng sẽ không bắn)
     }

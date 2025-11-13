@@ -39,7 +39,7 @@ Projectile::Projectile(const sf::Texture& texture,
 	std::vector<sf::IntRect> animFrames;
 	for (int i = 0; i < numFrames; ++i)
 	{
-		animFrames.push_back(sf::IntRect({ frameWidth * i, 0 }, { frameWidth, frameHeight }));
+		animFrames.emplace_back(sf::IntRect({ frameWidth * i, 0 }, { frameWidth, frameHeight }));
 	}
 	m_animator->addAnimation("SPIN", animFrames, frameTime);
 	m_animator->play("SPIN");
