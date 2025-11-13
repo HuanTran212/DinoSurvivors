@@ -4,7 +4,7 @@
 
 Ghost::Ghost(sf::Vector2f spawnPos)
     : m_sprite(AssetManager::getInstance().getTexture("Ghost.png")),
-    m_speed(100.0f),
+    m_speed(80.0f),
     m_velocity(0.f, 0.f),
     m_health(100.f),
 	m_knockbackVelocity(0.f, 0.f),
@@ -70,7 +70,7 @@ bool Ghost::isDead() const
 
 int Ghost::getCollisionDamage() const
 {
-    return 20;
+    return 10;
 }
 
 sf::Vector2f Ghost::getPosition() const

@@ -14,7 +14,7 @@ PlayingState::PlayingState(Game& game) :
 	const sf::Texture& bgTex = AssetManager::getInstance().getTexture("map.png");
 	const_cast<sf::Texture&>(bgTex).setRepeated(true);
 	m_backgroundSprite.setTexture(bgTex);
-	m_backgroundSprite.setTextureRect(sf::IntRect({ -10000, -10000 }, { 20000, 20000 }));
+	m_backgroundSprite.setTextureRect(sf::IntRect({ -100000, -100000 }, { 200000, 200000 }));
 }
 
 void PlayingState::processInput()
@@ -99,7 +99,7 @@ void PlayingState::checkCollisions()
 	    if (m_player.getBounds().findIntersection(enemy->getBounds()))
 	    {
 	        m_player.takeDamage(enemy->getCollisionDamage());
-	        enemy->takeDamage(10000000); // Ma chết khi chạm vào Player
+	        enemy->takeDamage(0); // Ma chết khi chạm vào Player
 	    }
 		if (enemy->isDead()) continue;
 	     // 2. Va chạm Đạn - Ma

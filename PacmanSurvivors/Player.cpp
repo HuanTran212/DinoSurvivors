@@ -6,7 +6,7 @@
 
 Player::Player()
 	: m_sprite(AssetManager::getInstance().getTexture("Idle.png")),
-	m_speed(180.f),
+	m_speed(70.f),
     m_hp(100),
 	m_maxHP(100),
 	m_xp(0),
@@ -38,8 +38,8 @@ Player::Player()
 	m_animator->addAnimation("HURT", hurtFrames, 0.1f);
     m_animator->play("IDLE"); // Ban đầu đứng yên
 	m_sprite.setOrigin({ frameWidth / 2.f, frameHeight / 2.f });
-    m_sprite.setPosition({ 10000, 10000 });
-	m_sprite.setScale({ 2.f, 2.f });
+    m_sprite.setPosition({ 100000, 100000 });
+	m_sprite.setScale({ 1.5f, 1.5f });
     m_weapons.push_back(std::make_unique<PelletShooter>());
 
     /*m_hitboxDebug.setFillColor(sf::Color::Transparent);
@@ -67,12 +67,12 @@ void Player::processInput(float dt) {
         if (movement.x > 0.f)
         {
             m_animator->play("WALK_RIGHT");
-            m_sprite.setScale({ 2.f, 2.f });
+            m_sprite.setScale({ 1.5f, 1.5f });
         }
         else if (movement.x < 0.f)
         {
             m_animator->play("WALK_LEFT");
-            m_sprite.setScale({ -2.f, 2.f });
+            m_sprite.setScale({ -1.5f, 1.5f });
         }
         else if (movement.y > 0.f)
         {
@@ -134,8 +134,8 @@ sf::FloatRect Player::getBounds() const
 {
     sf::Vector2f pos = m_sprite.getPosition();
     float left = pos.x - 20;
-    float top = pos.y - 60;
-    sf::FloatRect bounds({left, top} , { 50.f, 88.f});
+    float top = pos.y - 50;
+    sf::FloatRect bounds({left, top} , { 43.f, 70.f});
     return bounds;
 }
 
