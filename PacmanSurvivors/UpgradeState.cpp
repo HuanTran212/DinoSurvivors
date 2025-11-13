@@ -91,6 +91,7 @@ void UpgradeState::processInput()
 				if (selectedUpgrade != nullptr)
 				{
 					selectedUpgrade->applyUpgrade(m_player);
+					m_game.getUIManager().update(m_player);
 					m_game.popStates();
 					return;
 				}

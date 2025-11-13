@@ -63,7 +63,7 @@ int EnemySpawner::update(float dt, sf::Vector2f playerPosition, float totalGameT
                     {
                         const float PI = 3.14159265f;
                         float angle = static_cast<float>(rand()) / RAND_MAX * (2.f * PI);
-                        float distance = 800.f + static_cast<float>(rand()) / RAND_MAX * 200.f;
+                        float distance = 650.f + static_cast<float>(rand()) / RAND_MAX * 200.f;
                         float x = playerPosition.x + std::cos(angle) * distance;
                         float y = playerPosition.y + std::sin(angle) * distance;
 

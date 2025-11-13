@@ -42,9 +42,9 @@ Player::Player()
 	m_sprite.setScale({ 2.f, 2.f });
     m_weapons.push_back(std::make_unique<PelletShooter>());
 
-    m_hitboxDebug.setFillColor(sf::Color::Transparent);
+    /*m_hitboxDebug.setFillColor(sf::Color::Transparent);
     m_hitboxDebug.setOutlineColor(sf::Color::Red);
-    m_hitboxDebug.setOutlineThickness(1.f);
+    m_hitboxDebug.setOutlineThickness(1.f);*/
 }
 
 Player::~Player() {};
@@ -113,11 +113,11 @@ void Player::update(float dt, std::vector<Projectile>& projectiles, const std::v
 
 void Player::draw(sf::RenderWindow& window) {
     window.draw(m_sprite);
-    sf::FloatRect bounds = this->getBounds();
+    //sf::FloatRect bounds = this->getBounds();
 
     // 3. Cập nhật hình chữ nhật debug
-    m_hitboxDebug.setPosition(bounds.position);
-    m_hitboxDebug.setSize(bounds.size);
+   /* m_hitboxDebug.setPosition(bounds.position);
+    m_hitboxDebug.setSize(bounds.size);*/
 
     for(auto& weapon : m_weapons) {
         weapon->draw(window);
@@ -181,19 +181,19 @@ int Player::getXPToNextLevel() const
     return xpToNextLevel;
 }
 
-bool Player::addXP(int xpGained)
+int Player::addXP(int xpGained)
 {
-	bool leveledUp = false;
+	int leveledUp = 0;
 	int xpToNextLevel = getXPToNextLevel();
 	m_xp += xpGained;
 
     while(m_xp >= xpToNextLevel)
     {
+		leveledUp++;
         m_xp -= xpToNextLevel;
         xpToNextLevel = getXPToNextLevel();
         m_level++;
         std::cout << "Level Up! New Level: " << m_level << std::endl;
-		leveledUp = true;
 	}
 	return leveledUp;
 }

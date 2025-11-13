@@ -36,7 +36,20 @@ public:
     void takeDamage(int damage);
 	void addWeapon(std::unique_ptr<IWeapon> weapon);
 	int getXPToNextLevel() const;
-	bool addXP(int xpGainned);
+	int addXP(int xpGainned);
 	void heal(int amount);
 	void addmaxHP(int amount);
+
+	template <typename T>
+		T* getWeapon()
+		{
+			for (auto& weapon : m_weapons) {
+				// Kiểm tra xem vũ khí này có phải là kiểu T không
+				T* specificWeapon = dynamic_cast<T*>(weapon.get());
+				if (specificWeapon != nullptr) {
+					return specificWeapon; // Tìm thấy! Trả về con trỏ.
+				}
+			}
+			return nullptr;
+		}
 };

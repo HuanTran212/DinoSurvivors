@@ -36,11 +36,15 @@ void PlayingState::update(float dt)
 	int xpGained = m_enemySpawner.update(dt, m_player.getPosition(), m_totalTime);
 	if (xpGained > 0)
 	{
-		bool flap = m_player.addXP(xpGained);
-		if (flap)
+		int newXP = m_player.addXP(xpGained);
+		if (newXP > 0)
 		{
-			m_game.pushStates(std::make_unique<UpgradeState>(m_game, m_player));
+			for(int i = 0; i < newXP; ++i)
+			{
+				m_game.pushStates(std::make_unique<UpgradeState>(m_game, m_player));
+			}
 		}
+
 	}
 
 	for (auto& proj : m_Projectiles)

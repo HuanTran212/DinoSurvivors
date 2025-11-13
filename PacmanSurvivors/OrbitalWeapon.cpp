@@ -5,37 +5,16 @@
 OrbitalWeapon::OrbitalWeapon()
     : m_angle(0.f),
     m_radius(160.f), // Quay ở bán kính 160 pixel
-    m_orbCount(3),     // Bắt đầu với 3 quả cầu
+    m_orbCount(0),     // Bắt đầu với 3 quả cầu
     m_damage(30),
     m_damageCooldown(1.0f), // Mỗi quả cầu chỉ gây sát thương 1 lần/giây
     m_damageTimer(0.f),
     m_knockbackForce(120.f)
 {
-    const sf::Texture& tex = AssetManager::getInstance().getTexture("Suriken.png");
-    m_orbSprites.reserve(m_orbCount);
     // Khởi tạo các quả cầu
-    for (int i = 0; i < m_orbCount; ++i)
-    {
-        m_orbSprites.emplace_back(tex);
-
-        sf::Sprite& newSprite = m_orbSprites.back();
-
-        newSprite.setOrigin({ 8.f, 8.f });
-		newSprite.setScale({ 2.f, 2.f });
-
-        auto animator = std::make_unique<Animator>(newSprite);
-
-        int frameWidth = 16;
-        int frameHeight = 16;
-        int numFrames = 4;
-        std::vector<sf::IntRect> animFrames;
-        for (int j = 0; j < numFrames; ++j) {
-            animFrames.push_back(sf::IntRect({ frameWidth * j, 0 }, { frameWidth, frameHeight }));
-        }
-        animator->addAnimation("SPIN", animFrames, 0.1f);
-        animator->play("SPIN");
-
-        m_orbs.push_back(std::move(animator));
+    for (int i = 0; i < 3; ++i)
+    {  
+		addOrb();
     }
 }
 void OrbitalWeapon::update(float dt,
@@ -51,7 +30,7 @@ void OrbitalWeapon::update(float dt,
     m_damageTimer += dt;
     bool canDealDamage = (m_damageTimer >= m_damageCooldown);
     // Di chuyển và cập nhật từng quả cầu
-    for (int i = 0; i < m_orbCount; ++i)
+    for (int i = 0; i < m_orbs.size(); ++i)
     {
         // Tính toán vị trí (chia đều các quả cầu trên vòng tròn)
         float currentAngle = m_angle + (i * (2.f * PI / m_orbCount));
@@ -94,7 +73,7 @@ void OrbitalWeapon::update(float dt,
 void OrbitalWeapon::draw(sf::RenderWindow& window)
 {
     // Vẽ từng quả cầu
-	for (auto& orb : m_orbs)
+    for (auto& orb : m_orbs)
     {
         window.draw(orb->getSprite());
     }
@@ -103,4 +82,29 @@ void OrbitalWeapon::draw(sf::RenderWindow& window)
 float OrbitalWeapon::getKnockbackDirection() const
 {
     return m_knockbackForce;
+}
+
+void OrbitalWeapon::addOrb()
+{
+    m_orbCount++; //tăng số lượng
+    const sf::Texture& tex = AssetManager::getInstance().getTexture("Suriken.png");
+    // tạo sprite mới
+    auto newSpritePtr = std::make_unique<sf::Sprite>(tex);
+    newSpritePtr->setOrigin({ 8.f, 8.f });
+	newSpritePtr->setScale({ 2.f, 2.f }); // scale lên 2 lần
+    //tạo animator cho sprite đó
+    auto animator = std::make_unique<Animator>(*newSpritePtr); // Truyền giá trị sprite
+
+    // cài đặt animation
+    int frameWidth = 16; int frameHeight = 16; int numFrames = 4;
+    std::vector<sf::IntRect> animFrames;
+    for (int j = 0; j < numFrames; ++j) {
+        animFrames.push_back(sf::IntRect({ frameWidth * j, 0 }, { frameWidth, frameHeight }));
+    }
+    animator->addAnimation("SPIN", animFrames, 0.1f);
+    animator->play("SPIN");
+
+    // lưu trữ vào danh sách
+    m_orbSprites.push_back(std::move(newSpritePtr));
+    m_orbs.push_back(std::move(animator));
 }

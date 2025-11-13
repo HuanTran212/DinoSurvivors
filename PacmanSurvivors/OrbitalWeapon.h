@@ -17,9 +17,10 @@ public:
 
     void draw(sf::RenderWindow& window) override;
 	float getKnockbackDirection() const;
+	void addOrb();
 private:
     std::vector<std::unique_ptr<Animator>> m_orbs;
-    std::vector<sf::Sprite> m_orbSprites;
+    std::vector< std::unique_ptr<sf::Sprite>> m_orbSprites;
     // Thông số quỹ đạo
     float m_angle;       // Góc quay (sẽ tăng liên tục)
     float m_radius;      // Bán kính quỹ đạo

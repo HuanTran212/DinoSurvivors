@@ -6,9 +6,17 @@ OrbitalWeaponUpgrade::OrbitalWeaponUpgrade()
 }
 void OrbitalWeaponUpgrade::applyUpgrade(Player& player)
 {
-	player.addWeapon(std::make_unique<OrbitalWeapon>());
+	OrbitalWeapon* existingWeapon = player.getWeapon<OrbitalWeapon>();
+	if (existingWeapon)
+	{
+		existingWeapon->addOrb();
+	}
+	else
+	{
+		player.addWeapon(std::make_unique<OrbitalWeapon>());
+	}
 }
 std::string OrbitalWeaponUpgrade::getName() const
 {
-	return "Orbital Weapon Upgrade";
+	return "Suriken";
 }
