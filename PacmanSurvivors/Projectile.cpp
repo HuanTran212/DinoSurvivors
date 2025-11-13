@@ -1,17 +1,23 @@
 ﻿#include "Projectile.h"
 #include <cmath>
 
-Projectile::Projectile(const sf::Texture& texture, sf::Vector2f playerPos, sf::Vector2f dir, float speed)
+Projectile::Projectile(const sf::Texture& texture,
+	sf::Vector2f playerPos,
+	sf::Vector2f dir,
+	float speed,
+	int frameWidth = 32,
+	int frameHeight = 16,
+	int numFrames = 4)
 	:m_sprite(texture), 
 	m_direction(dir), 
 	m_velocity(0.f, 0.f), 
 	m_speed(speed), 
-	m_damage(35), 
+	m_damage(35),
 	m_isDestroyed(false),
 	m_knockbackForce(150.f)
 {
 	m_sprite.setPosition(playerPos);
-	m_sprite.setScale({ 2.f, 2.f });
+	m_sprite.setScale({ 2.5f, 2.5f });
 
 	// Chuẩn hóa vector hướng (Normalize)
 	float length = std::sqrt(dir.x * dir.x + dir.y * dir.y);
@@ -23,9 +29,6 @@ Projectile::Projectile(const sf::Texture& texture, sf::Vector2f playerPos, sf::V
 	}
 	m_animator = std::make_unique<Animator>(m_sprite);
 
-	int frameWidth = 32;
-	int frameHeight = 16;
-	int numFrames = 4;
 	float frameTime = 0.1f;
 
 	m_sprite.setOrigin({ frameWidth / 2.f, frameHeight / 2.f });

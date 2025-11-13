@@ -147,6 +147,8 @@
     <ClCompile Include="PlayingState.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
+    <ClCompile Include="RandomShooter.cpp" />
+    <ClCompile Include="RandomShooterUpgrade.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="UpgradeManager.cpp" />
     <ClCompile Include="UpgradeState.cpp" />
@@ -169,6 +171,8 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayingState.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="RandomShooter.h" />
+    <ClInclude Include="RandomShooterUpgrade.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="UpgradeManager.h" />
     <ClInclude Include="UpgradeState.h" />

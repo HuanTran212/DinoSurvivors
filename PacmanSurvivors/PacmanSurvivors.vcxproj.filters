@@ -135,6 +135,12 @@
     <ClCompile Include="UpgradeManager.cpp">
       <Filter>Source Files\Scenes\Scene\Upgrade</Filter>
     </ClCompile>
+    <ClCompile Include="RandomShooter.cpp">
+      <Filter>Source Files\Scenes\Object\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomShooterUpgrade.cpp">
+      <Filter>Source Files\Scenes\Scene\Upgrade</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h">
@@ -195,6 +201,12 @@
       <Filter>Header Files\High-Level</Filter>
     </ClInclude>
     <ClInclude Include="UpgradeManager.h">
+      <Filter>Header Files\Scenes\Scene\Upgrade</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomShooter.h">
+      <Filter>Header Files\Scenes\Object\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomShooterUpgrade.h">
       <Filter>Header Files\Scenes\Scene\Upgrade</Filter>
     </ClInclude>
   </ItemGroup>

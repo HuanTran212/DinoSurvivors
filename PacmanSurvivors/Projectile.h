@@ -14,7 +14,10 @@ private:
     std::unique_ptr<Animator> m_animator;
     float m_knockbackForce;
 public:
-    Projectile(const sf::Texture& texture, sf::Vector2f playerPos, sf::Vector2f dir, float speed);
+    Projectile(const sf::Texture& texture, sf::Vector2f playerPos, sf::Vector2f dir, float speed, 
+        int frameWidth,
+        int frameHeight,
+        int numFrames);
     Projectile(Projectile&& other) noexcept;
     Projectile& operator=(Projectile&& other) noexcept;
     int getDamage() const;
