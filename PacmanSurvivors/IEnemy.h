@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <SFML/Graphics.hpp>
 #include "SoundManager.h"
+#include "Animator.h"
 class IEnemy
 {
 public:

@@ -7,7 +7,7 @@
 
 class Player {
 private:
-    sf::Sprite m_sprite;
+	sf::Sprite m_sprite;
     float m_speed;
 	int m_level;
     int m_hp;

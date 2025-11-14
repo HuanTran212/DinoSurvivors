@@ -1,17 +1,20 @@
 ﻿#pragma once
-#pragma once
 #include <SFML/Graphics.hpp>
 #include "IEnemy.h"
 
 class Pinky : public IEnemy
 {
 private:
-    sf::Sprite m_sprite;
+    std::unique_ptr<Animator> m_animator;
+	sf::Sprite m_sprite;
     float m_speed;
     sf::Vector2f m_velocity;
     float m_health; // để dùng với TakeDamage và IsDead
 	sf::Vector2f m_knockbackVelocity;
 	bool m_isKnockBack;
+	bool m_isHurt;
+	float m_hurtTimer;
+	sf::Sprite m_shadowSprite;
 public:
     Pinky(sf::Vector2f spawnPos);
 
