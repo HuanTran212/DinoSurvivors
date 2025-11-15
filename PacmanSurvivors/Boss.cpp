@@ -1,17 +1,17 @@
-﻿#include "Pinky.h"
+﻿#include "Boss.h"
 #include "AssetManager.h"
 #include <cmath>
 
-Pinky::Pinky(sf::Vector2f spawnPos)
+Boss::Boss(sf::Vector2f spawnPos)
     : m_sprite(AssetManager::getInstance().getTexture("Dino.png")),
-    m_speed(80.0f),
+    m_speed(70.0f),
     m_velocity(0.f, 0.f),
-    m_health(100.f),
-	m_knockbackVelocity(0.f, 0.f),
-	m_isKnockBack(false),
-	m_isHurt(false),
-	m_hurtTimer(0.f),
-	m_shadowSprite(AssetManager::getInstance().getTexture("shadow_Dino.png"))
+    m_health(2000.f),
+    m_knockbackVelocity(0.f, 0.f),
+    m_isKnockBack(false),
+    m_isHurt(false),
+    m_hurtTimer(0.f),
+    m_shadowSprite(AssetManager::getInstance().getTexture("shadow_Dino.png"))
 {
     m_animator = std::make_unique<Animator>(m_sprite);
     // Kích thước của MỘT frame
@@ -22,11 +22,11 @@ Pinky::Pinky(sf::Vector2f spawnPos)
     {
         walk.emplace_back(sf::IntRect({ frameWidth * i, frameHeight * 3 }, { frameWidth, frameHeight }));
     }
-	std::vector<sf::IntRect> run;
+    std::vector<sf::IntRect> run;
     for (int i = 0; i < 7; ++i)
     {
         run.emplace_back(sf::IntRect({ frameWidth * i, frameHeight * 1 }, { frameWidth, frameHeight }));
-	}
+    }
     std::vector<sf::IntRect> hurt;
     for (int i = 0; i < 3; ++i)
     {
@@ -34,7 +34,7 @@ Pinky::Pinky(sf::Vector2f spawnPos)
     }
 
     // Thêm các animation vào Animator
-	m_animator->addAnimation("WALK", walk, 0.1f);
+    m_animator->addAnimation("WALK", walk, 0.1f);
     m_animator->addAnimation("RUN", run, 0.1f);
     m_animator->addAnimation("HURT", hurt, 0.1f);
     m_animator->play("WALK");
@@ -42,17 +42,17 @@ Pinky::Pinky(sf::Vector2f spawnPos)
     m_sprite.setPosition(spawnPos);
     m_sprite.setScale({ 2.f, 2.f });
 
-	m_shadowSprite.setScale({ 2.f, 2.f });
-	m_shadowSprite.setOrigin({ 12.f, 12.f });
+    m_shadowSprite.setScale({ 5.f, 5.f });
+    m_shadowSprite.setOrigin({ 12.f, 12.f });
 
     /*m_hitboxDebug.setFillColor(sf::Color::Transparent);
     m_hitboxDebug.setOutlineColor(sf::Color::Red);
     m_hitboxDebug.setOutlineThickness(1.f);*/
 }
 
-void Pinky::update(float dt, sf::Vector2f playerPos)
+void Boss::update(float dt, sf::Vector2f playerPos)
 {
-	m_animator->update(dt);
+    m_animator->update(dt);
     if (m_isHurt)
     {
         m_hurtTimer -= dt;
@@ -63,7 +63,7 @@ void Pinky::update(float dt, sf::Vector2f playerPos)
     }
     if (m_isKnockBack)
     {
-		if(m_animator) m_animator->play("HURT");
+        if (m_animator) m_animator->play("HURT");
         m_sprite.move(m_knockbackVelocity * dt);
         m_knockbackVelocity *= 0.5f; // Giảm dần knockback theo thời gian
         if (std::abs(m_knockbackVelocity.x) < 0.1f && std::abs(m_knockbackVelocity.y) < 0.1f)
@@ -77,13 +77,13 @@ void Pinky::update(float dt, sf::Vector2f playerPos)
         sf::Vector2f ghostPos = m_sprite.getPosition();
         sf::Vector2f direction = playerPos - ghostPos;
         float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
-		float desiredDistance = 150.f;
+        float desiredDistance = 150.f;
         float runSpeed = m_speed;
-        if(m_isHurt)
+        if (m_isHurt)
         {
-            if(m_animator) m_animator->play("RUN");
-			runSpeed *= 1.2f;
-		}
+            if (m_animator) m_animator->play("RUN");
+            runSpeed *= 2.f;
+        }
         else
         {
             if (length > desiredDistance)
@@ -93,7 +93,7 @@ void Pinky::update(float dt, sf::Vector2f playerPos)
             else
             {
                 if (m_animator) m_animator->play("RUN");
-				runSpeed *= 1.2f;
+                runSpeed *= 2.f;
             }
         }
         if (length != 0)
@@ -102,22 +102,22 @@ void Pinky::update(float dt, sf::Vector2f playerPos)
             m_velocity = direction * runSpeed;
             if (m_velocity.x > 0.f)
             {
-                m_sprite.setScale({ 2.f, 2.f });
+                m_sprite.setScale({ 5.f, 5.f });
             }
             else if (m_velocity.x < 0.f)
             {
-                m_sprite.setScale({ -2.f, 2.f });
+                m_sprite.setScale({ -5.f, 5.f });
             }
             m_sprite.move((m_velocity)*dt);
-			m_shadowSprite.setPosition(m_sprite.getPosition());
+            m_shadowSprite.setPosition(m_sprite.getPosition());
         }
     }
-  
+
 }
 
-void Pinky::draw(sf::RenderWindow& window)
+void Boss::draw(sf::RenderWindow& window)
 {
-	window.draw(m_shadowSprite);
+    window.draw(m_shadowSprite);
     window.draw(m_sprite);
     /*sf::FloatRect bounds = this->getBounds();
     m_hitboxDebug.setPosition(bounds.position);
@@ -125,45 +125,40 @@ void Pinky::draw(sf::RenderWindow& window)
     window.draw(m_hitboxDebug);*/
 }
 
-sf::FloatRect Pinky::getBounds() const
+sf::FloatRect Boss::getBounds() const
 {
-    sf::Vector2f pos = m_sprite.getPosition();
-    float left = pos.x - 15;
-    float top = pos.y - 15;
-    sf::FloatRect bounds({ left, top }, { 30.f, 30.f });
-    return bounds;
+    return m_sprite.getGlobalBounds();
 }
-
-void Pinky::takeDamage(int damage)
+void Boss::takeDamage(int damage)
 {
-	m_isHurt = true;
-	m_hurtTimer = 3.f;
+    m_isHurt = true;
+    m_hurtTimer = 3.f;
     m_health -= damage;
     if (m_health < 0.f)
         m_health = 0.f;
 }
 
-bool Pinky::isDead() const
+bool Boss::isDead() const
 {
     return m_health <= 0.f;
 }
 
-int Pinky::getCollisionDamage() const
+int Boss::getCollisionDamage() const
 {
-    return 15;
+    return 50;
 }
 
-sf::Vector2f Pinky::getPosition() const
+sf::Vector2f Boss::getPosition() const
 {
     return m_sprite.getPosition();
 }
 
-void Pinky::setPosition(sf::Vector2f pos)
+void Boss::setPosition(sf::Vector2f pos)
 {
     m_sprite.setPosition(pos);
 }
 
-void Pinky::applySeparation(const std::vector<std::unique_ptr<IEnemy>>& others)
+void Boss::applySeparation(const std::vector<std::unique_ptr<IEnemy>>& others)
 {
     sf::Vector2f repel(0.f, 0.f);
     float desiredDistance = 40.f; // khoảng cách tối thiểu giữa quái
@@ -184,13 +179,13 @@ void Pinky::applySeparation(const std::vector<std::unique_ptr<IEnemy>>& others)
     m_sprite.move(repel * 0.2f); // đẩy nhẹ ra
 }
 
-int Pinky::getXPReward() const
+int Boss::getXPReward() const
 {
-    return 15;
+    return 500;
 }
 
-void Pinky::applyKnockback(sf::Vector2f direction, float force)
+void Boss::applyKnockback(sf::Vector2f direction, float force)
 {
-	m_knockbackVelocity += direction * force;
-	m_isKnockBack = true;
+    m_knockbackVelocity += direction * force;
+    m_isKnockBack = true;
 }

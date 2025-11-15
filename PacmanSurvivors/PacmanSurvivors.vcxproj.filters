@@ -150,6 +150,9 @@
     <ClCompile Include="SoundManager.cpp">
       <Filter>Source Files\High-Level</Filter>
     </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Source Files\Scenes\Object\Ghost</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h">
@@ -226,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>Header Files\High-Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Header Files\Scenes\Object\Ghost</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

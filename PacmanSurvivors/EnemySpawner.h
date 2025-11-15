@@ -10,7 +10,8 @@
 enum class EnemyType
 {
     Ghost,
-    Pinky
+    Pinky,
+    Boss
 };
 
 struct SpawnRule
@@ -21,11 +22,22 @@ struct SpawnRule
     float timer;    // Đồng hồ nội bộ của quy tắc này
     SpawnRule(EnemyType t, float i, int c) : type(t), interval(i), count(c), timer(0.f) {}
 };
+struct SpawnEvent
+{
+    EnemyType type;
+    int count;
+    bool hasSpawned; // Cờ để đảm bảo chỉ chạy 1 lần
+
+    SpawnEvent(EnemyType t, int c)
+        : type(t), count(c), hasSpawned(false) {
+    }
+};
 struct GameWave
 {
     float startTime{}; // Thời điểm bắt đầu
     float endTime{};   // Thời điểm kết thúc
     std::vector<SpawnRule> rules{}; // Các quy tắc spawn trong làn sóng này
+	std::vector<SpawnEvent> events{}; // Các sự kiện spawn trong làn sóng này
 };
 
 class EnemySpawner

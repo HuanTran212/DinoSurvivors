@@ -1,6 +1,7 @@
 ﻿#include "EnemySpawner.h"
 #include "Ghost.h"
 #include "Pinky.h"
+#include "Boss.h"
 #include <cmath>
 
 std::unique_ptr<IEnemy> EnemySpawner::createEnemy(EnemyType type, sf::Vector2f spawnPos)
@@ -11,6 +12,8 @@ std::unique_ptr<IEnemy> EnemySpawner::createEnemy(EnemyType type, sf::Vector2f s
         return std::make_unique<Ghost>(spawnPos); // Tạo Ghost
     case EnemyType::Pinky:
         return std::make_unique<Pinky>(spawnPos); // Tạo Pinky
+    case EnemyType::Boss:
+		return std::make_unique<Boss>(spawnPos);
     default:
         // Mặc định an toàn
         return std::make_unique<Ghost>(spawnPos);
@@ -37,43 +40,69 @@ EnemySpawner::EnemySpawner()
     // Giai đoạn 3: 60 giây trở đi
     GameWave wave3;
     wave3.startTime = 20.f;
-    wave3.endTime = 9999.f;
+    wave3.endTime = 30.f;
     wave3.rules.push_back(SpawnRule(EnemyType::Ghost, 1.5f, 1)); // 1 Ghost mỗi 0.5 giây
 	wave3.rules.push_back(SpawnRule(EnemyType::Pinky, 5.0f, 3)); // 3 Pinky mỗi 4 giây
 	m_timeLine.push_back(wave3);
+
+    GameWave waveBoss;
+    waveBoss.startTime = 30.f;
+    waveBoss.endTime = 9999.f;
+    waveBoss.events.push_back(SpawnEvent(EnemyType::Boss, 1));
+    //waveBoss.rules.push_back(SpawnRule(EnemyType::Ghost, 5.0f, 2)); // 2 Ghost mỗi 5s
+    m_timeLine.push_back(waveBoss);
 }
 
 
 int EnemySpawner::update(float dt, sf::Vector2f playerPosition, float totalGameTime)
 {
-    int totalXPDropped = 0;
-    for (auto& wave : m_timeLine)
+    GameWave* activeWave = nullptr;
+    for (auto& wave : m_timeLine) // Lặp từ đầu
     {
-        // Kiểm tra xem wave này có đang hoạt động không
         if (totalGameTime >= wave.startTime && totalGameTime < wave.endTime)
         {
-            // Chạy tất cả các quy tắc (rules) trong wave này
-            for (auto& rule : wave.rules)
+            activeWave = &wave; // Ghi đè liên tục, chỉ giữ cái cuối
+        }
+    }
+    if(activeWave != nullptr)
+    {
+        for (auto& rule : activeWave->rules)
+        {
+            rule.timer += dt;
+            if (rule.timer >= rule.interval)
             {
-                rule.timer += dt;
-                if (rule.timer >= rule.interval)
+                rule.timer -= rule.interval; // Reset timer của rule
+                for (int i = 0; i < rule.count; ++i)
                 {
-                    rule.timer -= rule.interval; // Reset timer của rule
-                    for (int i = 0; i < rule.count; ++i)
-                    {
-                        const float PI = 3.14159265f;
-                        float angle = static_cast<float>(rand()) / RAND_MAX * (2.f * PI);
-                        float distance = 650.f + static_cast<float>(rand()) / RAND_MAX * 200.f;
-                        float x = playerPosition.x + std::cos(angle) * distance;
-                        float y = playerPosition.y + std::sin(angle) * distance;
+                    const float PI = 3.14159265f;
+                    float angle = static_cast<float>(rand()) / RAND_MAX * (2.f * PI);
+                    float distance = 650.f + static_cast<float>(rand()) / RAND_MAX * 200.f;
+                    float x = playerPosition.x + std::cos(angle) * distance;
+                    float y = playerPosition.y + std::sin(angle) * distance;
 
-                        m_enemies.push_back(createEnemy(rule.type, sf::Vector2f(x, y)));
-                    }
+                    m_enemies.push_back(createEnemy(rule.type, sf::Vector2f(x, y)));
                 }
             }
         }
-    }
-    
+        for (auto& event : activeWave->events)
+        {
+            if (!event.hasSpawned)
+            {
+                event.hasSpawned = true; // Đánh dấu là đã chạy
+
+                for (int i = 0; i < event.count; ++i)
+                {
+                    const float PI = 3.14159265f;
+                    float angle = static_cast<float>(rand()) / RAND_MAX * (2.f * PI);
+                    float distance = 800.f + static_cast<float>(rand()) / RAND_MAX * 200.f;
+                    float x = playerPosition.x + std::cos(angle) * distance;
+                    float y = playerPosition.y + std::sin(angle) * distance;
+
+                    m_enemies.push_back(createEnemy(event.type, { x, y }));
+                }
+            }
+        }
+	}
 	int totalXP = 0;
     for (auto it = m_enemies.begin(); it != m_enemies.end(); )
     {
