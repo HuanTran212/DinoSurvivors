@@ -92,7 +92,6 @@ void UpgradeState::processInput()
 				{
 					SoundManager::getInstance().playSound("Levelup.wav");
 					selectedUpgrade->applyUpgrade(m_player);
-					m_game.getUIManager().update(m_player);
 					m_game.popStates();
 					return;
 				}

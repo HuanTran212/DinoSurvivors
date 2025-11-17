@@ -5,38 +5,47 @@
 #include "MainMenuState.h" // Hoặc về menu (tùy chọn)
 #include <string>
 
-GameOverState::GameOverState(Game& game, int finalLevel)
+GameOverState::GameOverState(Game& game, int finalLevel, bool isWin)
     : m_game(game),
 	m_gameOverText(AssetManager::getInstance().getFont("pixel.ttf")),
 	m_scoreText(AssetManager::getInstance().getFont("pixel.ttf")),
 	m_restartText(AssetManager::getInstance().getFont("pixel.ttf")),
     m_font(AssetManager::getInstance().getFont("pixel.ttf"))
 {
-	SoundManager::getInstance().stopMusic();
-	SoundManager::getInstance().playSound("GameOver.wav");
     sf::Vector2f windowSize = (sf::Vector2f)m_game.getWindow().getSize();
 
-    // 1. Lớp phủ màu ĐỎ mờ (Máu me một chút)
     m_overlay.setSize(windowSize);
-    m_overlay.setFillColor(sf::Color(100, 0, 0, 50)); // Đỏ thẫm, mờ
-
-    // 2. Chữ GAME OVER
+	//Chữ Game Over / Victory
     m_gameOverText.setFont(m_font);
-    m_gameOverText.setString("GAME OVER");
     m_gameOverText.setCharacterSize(80);
-    m_gameOverText.setFillColor(sf::Color::Red);
     m_gameOverText.setStyle(sf::Text::Bold);
+    if (isWin)
+    {
+        SoundManager::getInstance().stopMusic();
+        SoundManager::getInstance().playSound("WinGame.wav");
+        m_overlay.setFillColor(sf::Color(0, 100, 0, 150));
+        m_gameOverText.setString("VICTORY!");
+        m_gameOverText.setFillColor(sf::Color::Green);
+    }
+    else
+    {
+        SoundManager::getInstance().stopMusic();
+        SoundManager::getInstance().playSound("GameOver.wav");
+        m_overlay.setFillColor(sf::Color(100, 0, 0, 150));
+        m_gameOverText.setString("GAME OVER");
+        m_gameOverText.setFillColor(sf::Color::Red);
+    }
     // Căn giữa (tương đối)
     m_gameOverText.setPosition({ windowSize.x / 2.f - 250.f, windowSize.y / 2.f - 150.f });
 
-    // 3. Chữ Score (Level đạt được)
+    // Chữ Score (Level đạt được)
     m_scoreText.setFont(m_font);
     m_scoreText.setString("You reached Level " + std::to_string(finalLevel));
     m_scoreText.setCharacterSize(30);
     m_scoreText.setFillColor(sf::Color::White);
     m_scoreText.setPosition({ windowSize.x / 2.f - 180.f, windowSize.y / 2.f - 20.f });
 
-    // 4. Chữ Hướng dẫn
+    //chữ hướng dẫn
     m_restartText.setFont(m_font);
     m_restartText.setString("Press ENTER to Restart");
     m_restartText.setCharacterSize(25);

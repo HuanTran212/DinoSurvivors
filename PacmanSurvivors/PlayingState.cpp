@@ -48,11 +48,6 @@ void PlayingState::update(float dt)
 		}
 
 	}
-	if (m_player.getHP() <= 0)
-	{
-		m_game.replaceAllStates(std::make_unique<GameOverState>(m_game, m_player.getLevel()));
-		return;
-	}
 
 	for (auto& proj : m_Projectiles)
 	{
@@ -75,7 +70,17 @@ void PlayingState::update(float dt)
 		m_Projectiles.end());
 
 	checkCollisions();
-	m_game.getUIManager().update(m_player);
+	m_game.getUIManager().update(m_player, m_totalTime);
+	if(m_player.getHP() <= 0)
+	{
+		m_game.pushStates(std::make_unique<GameOverState>(m_game, m_player.getLevel(), false));
+		return;
+	}
+	else if (m_totalTime >= 300.f)
+	{
+		m_game.pushStates(std::make_unique<GameOverState>(m_game, m_player.getLevel(), true));
+		return;
+	}
 	m_game.getWorldView().setCenter(m_player.getPosition());
 }
 

@@ -6,7 +6,7 @@
 class GameOverState : public IGameState
 {
 public:
-    GameOverState(Game& game, int finalLevel);
+    GameOverState(Game& game, int finalLevel, bool isWin);
 
     void processInput() override;
     void update(float dt) override;
