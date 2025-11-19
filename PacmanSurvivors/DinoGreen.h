@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "IEnemy.h"
 
-class Ghost : public IEnemy
+class DinoGreen : public IEnemy
 {
 private:
     sf::Sprite m_sprite;
@@ -16,7 +16,7 @@ private:
     sf::Sprite m_shadowSprite;
 	std::unique_ptr<Animator> m_animator;
 public:
-    Ghost(sf::Vector2f spawnPos = { 300.f, 400.f });
+    DinoGreen(sf::Vector2f spawnPos = { 300.f, 400.f });
 
     void update(float dt, sf::Vector2f playerPos) override;
     void draw(sf::RenderWindow& window) override;
