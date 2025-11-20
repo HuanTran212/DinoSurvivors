@@ -1,8 +1,8 @@
 ﻿#include "GameOverState.h"
 #include "Game.h"
 #include "AssetManager.h"
-#include "PlayingState.h" // Để restart game
-#include "MainMenuState.h" // Hoặc về menu (tùy chọn)
+#include "PlayingState.h"
+#include "MainMenuState.h" 
 #include <string>
 
 GameOverState::GameOverState(Game& game, int finalLevel, bool isWin)

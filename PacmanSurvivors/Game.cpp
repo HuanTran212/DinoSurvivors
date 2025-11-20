@@ -24,11 +24,6 @@ void Game::run()
 		}
         currentState->processInput(); // State tự xử lý input
         currentState = getCurrentState();
-        if (currentState == nullptr)
-        {
-            m_window.close();
-            return;
-        }
 
         if (currentState == nullptr)
         {
