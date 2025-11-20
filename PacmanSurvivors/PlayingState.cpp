@@ -106,14 +106,14 @@ void PlayingState::checkCollisions()
 {
 	 for (auto& enemy : m_enemySpawner.getEnemies())
 	 {
-	     // 1. Va chạm Ma - Player
+	     // va chạm Ma - Player
 	    if (m_player.getBounds().findIntersection(enemy->getBounds()))
 	    {
 	        m_player.takeDamage(enemy->getCollisionDamage());
-	        enemy->takeDamage(0); // Ma chết khi chạm vào Player
+	        enemy->takeDamage(0);
 	    }
 		if (enemy->isDead()) continue;
-	     // 2. Va chạm Đạn - Ma
+	     // va chạm Đạn - Ma
 	    for (auto& proj : m_Projectiles)
 	    {
 	        if (proj.getBounds().findIntersection(enemy->getBounds()))

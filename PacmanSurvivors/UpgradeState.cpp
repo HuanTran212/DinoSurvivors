@@ -74,17 +74,17 @@ void UpgradeState::processInput()
 				IUpgrade* selectedUpgrade = nullptr;
 				if (keyEvent->code == sf::Keyboard::Key::Num1 && m_currentUpgrades.size() >= 1)
 				{
-					// Chọn nâng cấp 1
+					//chọn nâng cấp 1
 					selectedUpgrade = m_currentUpgrades[0];
 				}
 				else if (keyEvent->code == sf::Keyboard::Key::Num2 && m_currentUpgrades.size() >= 2)
 				{
-					// Chọn nâng cấp 2
+					//chọn nâng cấp 2
 					selectedUpgrade = m_currentUpgrades[1];
 				}
 				else if (keyEvent->code == sf::Keyboard::Key::Num3 && m_currentUpgrades.size() >= 3)
 				{
-					// Chọn nâng cấp 3
+					//chọn nâng cấp 3
 					selectedUpgrade = m_currentUpgrades[2];
 				}
 

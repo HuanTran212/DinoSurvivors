@@ -20,4 +20,5 @@ private:
     sf::Text m_gameOverText;
     sf::Text m_scoreText;
     sf::Text m_restartText;
+	sf::Text m_exitText;
 };

@@ -10,6 +10,7 @@ GameOverState::GameOverState(Game& game, int finalLevel, bool isWin)
 	m_gameOverText(AssetManager::getInstance().getFont("pixel.ttf")),
 	m_scoreText(AssetManager::getInstance().getFont("pixel.ttf")),
 	m_restartText(AssetManager::getInstance().getFont("pixel.ttf")),
+	m_exitText(AssetManager::getInstance().getFont("pixel.ttf")),
     m_font(AssetManager::getInstance().getFont("pixel.ttf"))
 {
     sf::Vector2f windowSize = (sf::Vector2f)m_game.getWindow().getSize();
@@ -51,6 +52,12 @@ GameOverState::GameOverState(Game& game, int finalLevel, bool isWin)
     m_restartText.setCharacterSize(25);
     m_restartText.setFillColor(sf::Color::Yellow);
     m_restartText.setPosition({ windowSize.x / 2.f - 190.f, windowSize.y / 2.f + 50.f });
+
+	m_exitText.setFont(m_font);
+	m_exitText.setString("Press ESCAPE to Main Menu");
+	m_exitText.setCharacterSize(25);
+	m_exitText.setFillColor(sf::Color::Yellow);
+	m_exitText.setPosition({ windowSize.x / 2.f - 200.f, windowSize.y / 2.f + 90.f });
 }
 
 void GameOverState::processInput()
@@ -68,6 +75,10 @@ void GameOverState::processInput()
             {
                 m_game.replaceAllStates(std::make_unique<PlayingState>(m_game));
             }
+            if(keyEvent && keyEvent->code == sf::Keyboard::Key::Escape)
+            {
+                m_game.replaceAllStates(std::make_unique<MainMenuState>(m_game));
+			}
         }
     }
 }
