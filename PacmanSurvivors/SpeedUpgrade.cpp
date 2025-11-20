@@ -7,8 +7,8 @@ SpeedUpgrade::SpeedUpgrade() {
 
 void SpeedUpgrade::applyUpgrade(Player& player)
 {
-    // Tăng tốc độ thêm 10 (khoảng 15%)
-    player.addMoveSpeed(10.f);
+    // Tăng tốc độ thêm 15 (khoảng 15%)
+    player.addMoveSpeed(15.f);
 }
 
 std::string SpeedUpgrade::getName() const

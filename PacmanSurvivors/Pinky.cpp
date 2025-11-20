@@ -186,7 +186,7 @@ void Pinky::applySeparation(const std::vector<std::unique_ptr<IEnemy>>& others)
 
 int Pinky::getXPReward() const
 {
-    return 15;
+    return 20;
 }
 
 void Pinky::applyKnockback(sf::Vector2f direction, float force)

@@ -38,37 +38,41 @@ std::unique_ptr<IEnemy> EnemySpawner::createEnemy(EnemyType type, sf::Vector2f s
 EnemySpawner::EnemySpawner()
 	:m_timeLine()
 {
-    // Giai đoạn 1: 0 - 30 giây
+    // Giai đoạn 1: 0 - 60 giây
     GameWave wave1;
     wave1.startTime = 0.f;
-    wave1.endTime = 10.f;
-    wave1.rules.push_back(SpawnRule(EnemyType::DinoGreen, 2.0f, 1)); // 1 Ghost mỗi 2 giây
+    wave1.endTime = 60.f;
+    wave1.rules.push_back(SpawnRule(EnemyType::DinoGreen, 2.0f, 1));
+		wave1.rules.push_back(SpawnRule(EnemyType::Pinky, 3.0f, 1));
 	m_timeLine.push_back(wave1);
 
-    // Giai đoạn 2: 30 - 60 giây
+    // Giai đoạn 2: 60 - 120 giây
     GameWave wave2;
-    wave2.startTime = 10.f;
-    wave2.endTime = 20.f;
-    wave2.rules.push_back(SpawnRule(EnemyType::DinoBlue, 3.0f, 2)); // 2 Ghost mỗi 3 giây
-    wave2.rules.push_back(SpawnRule(EnemyType::Pinky, 2.0f, 1)); // 1 Pinky mỗi 2 giây
+    wave2.startTime = 60.f;
+    wave2.endTime = 120.f;
+    wave2.rules.push_back(SpawnRule(EnemyType::DinoBlue, 3.0f, 2)); 
+    wave2.rules.push_back(SpawnRule(EnemyType::Pinky, 2.0f, 1));
 	m_timeLine.push_back(wave2);
 
-    // Giai đoạn 3: 60 giây trở đi
+    // Giai đoạn 3: 120 giây trở đi
     GameWave wave3;
-    wave3.startTime = 20.f;
-    wave3.endTime = 30.f;
-    wave3.rules.push_back(SpawnRule(EnemyType::DinoYellow, 1.5f, 1)); // 1 Ghost mỗi 0.5 giây
-	wave3.rules.push_back(SpawnRule(EnemyType::Pinky, 5.0f, 3)); // 3 Pinky mỗi 4 giây
+    wave3.startTime = 60.f;
+    wave3.endTime = 120.f;
+    wave3.rules.push_back(SpawnRule(EnemyType::DinoYellow, 1.f, 1));
+	wave3.rules.push_back(SpawnRule(EnemyType::Pinky, 1.5f, 2)); 
 	m_timeLine.push_back(wave3);
 
     GameWave waveBoss;
-    waveBoss.startTime = 30.f;
+    waveBoss.startTime = 90.f;
     waveBoss.endTime = 9999.f;
     waveBoss.events.push_back(SpawnEvent(EnemyType::Boss, 1));
     waveBoss.events.push_back(SpawnEvent(EnemyType::BossGreen, 1));
     waveBoss.events.push_back(SpawnEvent(EnemyType::BossDinoBlue, 1));
     waveBoss.events.push_back(SpawnEvent(EnemyType::BossDinoYellow, 1));
-    //waveBoss.rules.push_back(SpawnRule(EnemyType::Ghost, 5.0f, 2)); // 2 Ghost mỗi 5s
+	waveBoss.rules.push_back(SpawnRule(EnemyType::Pinky, 2.0f, 2));
+	waveBoss.rules.push_back(SpawnRule(EnemyType::DinoBlue, 1.5f, 1));
+	waveBoss.rules.push_back(SpawnRule(EnemyType::DinoGreen, 2.5f, 2));
+	waveBoss.rules.push_back(SpawnRule(EnemyType::DinoYellow, 3.5f, 3));
     m_timeLine.push_back(waveBoss);
 }
 

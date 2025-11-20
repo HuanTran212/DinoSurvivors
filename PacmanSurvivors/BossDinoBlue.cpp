@@ -4,9 +4,9 @@
 
 BossDinoBlue::BossDinoBlue(sf::Vector2f spawnPos)
     : m_sprite(AssetManager::getInstance().getTexture("DinoBlue.png")),
-    m_speed(60.0f),
+    m_speed(80.0f),
     m_velocity(0.f, 0.f),
-    m_health(200.f),
+    m_health(1500.f),
     m_knockbackVelocity(0.f, 0.f),
     m_isKnockBack(false),
     m_isHurt(false),
@@ -166,7 +166,7 @@ bool BossDinoBlue::isDead() const
 
 int BossDinoBlue::getCollisionDamage() const
 {
-    return 20;
+    return 30;
 }
 
 sf::Vector2f BossDinoBlue::getPosition() const
@@ -202,7 +202,7 @@ void BossDinoBlue::applySeparation(const std::vector<std::unique_ptr<IEnemy>>& o
 
 int BossDinoBlue::getXPReward() const
 {
-    return 200;
+    return 300;
 }
 
 void BossDinoBlue::applyKnockback(sf::Vector2f direction, float force)

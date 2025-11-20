@@ -4,9 +4,9 @@
 
 DinoYellow::DinoYellow(sf::Vector2f spawnPos)
     : m_sprite(AssetManager::getInstance().getTexture("DinoYellow.png")),
-    m_speed(60.0f),
+    m_speed(100.0f),
     m_velocity(0.f, 0.f),
-    m_health(200.f),
+    m_health(250.f),
     m_knockbackVelocity(0.f, 0.f),
     m_isKnockBack(false),
     m_isHurt(false),
@@ -99,7 +99,7 @@ void DinoYellow::update(float dt, sf::Vector2f playerPos)
 
             if (m_animator) m_animator->play("RUN");
 
-            runSpeed *= 1.5f;
+            runSpeed *= 1.3f;
         }
         else
         {
@@ -110,7 +110,7 @@ void DinoYellow::update(float dt, sf::Vector2f playerPos)
             else
             {
                 if (m_animator) m_animator->play("RUN");
-                runSpeed *= 1.5f;
+                runSpeed *= 1.3f;
             }
         }
 
@@ -166,7 +166,7 @@ bool DinoYellow::isDead() const
 
 int DinoYellow::getCollisionDamage() const
 {
-    return 20;
+    return 25;
 }
 
 sf::Vector2f DinoYellow::getPosition() const
@@ -202,7 +202,7 @@ void DinoYellow::applySeparation(const std::vector<std::unique_ptr<IEnemy>>& oth
 
 int DinoYellow::getXPReward() const
 {
-    return 20;
+    return 25;
 }
 
 void DinoYellow::applyKnockback(sf::Vector2f direction, float force)

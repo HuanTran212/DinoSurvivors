@@ -145,7 +145,7 @@ bool Boss::isDead() const
 
 int Boss::getCollisionDamage() const
 {
-    return 50;
+    return 40;
 }
 
 sf::Vector2f Boss::getPosition() const

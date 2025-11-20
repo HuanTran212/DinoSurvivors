@@ -153,6 +153,27 @@
     <ClCompile Include="Boss.cpp">
       <Filter>Source Files\Scenes\Object\Ghost</Filter>
     </ClCompile>
+    <ClCompile Include="BossDinoBlue.cpp">
+      <Filter>Source Files\Scenes\Object\Ghost</Filter>
+    </ClCompile>
+    <ClCompile Include="BossDinoYellow.cpp">
+      <Filter>Source Files\Scenes\Object\Ghost</Filter>
+    </ClCompile>
+    <ClCompile Include="BossGreen.cpp">
+      <Filter>Source Files\Scenes\Object\Ghost</Filter>
+    </ClCompile>
+    <ClCompile Include="DinoBlue.cpp">
+      <Filter>Source Files\Scenes\Object\Ghost</Filter>
+    </ClCompile>
+    <ClCompile Include="DinoYellow.cpp">
+      <Filter>Source Files\Scenes\Object\Ghost</Filter>
+    </ClCompile>
+    <ClCompile Include="HealUpgrade.cpp">
+      <Filter>Source Files\Scenes\Scene\Upgrade</Filter>
+    </ClCompile>
+    <ClCompile Include="SpeedUpgrade.cpp">
+      <Filter>Source Files\Scenes\Scene\Upgrade</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h">
@@ -232,6 +253,27 @@
     </ClInclude>
     <ClInclude Include="Boss.h">
       <Filter>Header Files\Scenes\Object\Ghost</Filter>
+    </ClInclude>
+    <ClInclude Include="BossDinoBlue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BossDinoYellow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BossGreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DinoBlue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DinoYellow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HealUpgrade.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpeedUpgrade.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

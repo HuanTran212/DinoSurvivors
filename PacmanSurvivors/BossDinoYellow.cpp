@@ -4,9 +4,9 @@
 
 BossDinoYellow::BossDinoYellow(sf::Vector2f spawnPos)
     : m_sprite(AssetManager::getInstance().getTexture("DinoYellow.png")),
-    m_speed(60.0f),
+    m_speed(90.0f),
     m_velocity(0.f, 0.f),
-    m_health(200.f),
+    m_health(2500.f),
     m_knockbackVelocity(0.f, 0.f),
     m_isKnockBack(false),
     m_isHurt(false),
@@ -166,7 +166,7 @@ bool BossDinoYellow::isDead() const
 
 int BossDinoYellow::getCollisionDamage() const
 {
-    return 20;
+    return 45;
 }
 
 sf::Vector2f BossDinoYellow::getPosition() const
@@ -202,7 +202,7 @@ void BossDinoYellow::applySeparation(const std::vector<std::unique_ptr<IEnemy>>&
 
 int BossDinoYellow::getXPReward() const
 {
-    return 200;
+    return 550;
 }
 
 void BossDinoYellow::applyKnockback(sf::Vector2f direction, float force)

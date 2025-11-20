@@ -7,7 +7,7 @@ OrbitalWeapon::OrbitalWeapon()
     m_radius(160.f), // Quay ở bán kính 160 pixel
     m_orbCount(0),     // Bắt đầu với 3 quả cầu
     m_damage(30),
-    m_damageCooldown(1.0f), // Mỗi quả cầu chỉ gây sát thương 1 lần/giây
+    m_damageCooldown(0.3f), // Mỗi quả cầu chỉ gây sát thương 1 lần/giây
     m_damageTimer(0.f),
     m_knockbackForce(120.f)
 {

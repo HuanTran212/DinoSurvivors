@@ -4,9 +4,9 @@
 
 DinoBlue::DinoBlue(sf::Vector2f spawnPos)
     : m_sprite(AssetManager::getInstance().getTexture("DinoBlue.png")),
-    m_speed(60.0f),
+    m_speed(80.0f),
     m_velocity(0.f, 0.f),
-    m_health(200.f),
+    m_health(150.f),
     m_knockbackVelocity(0.f, 0.f),
     m_isKnockBack(false),
     m_isHurt(false),
@@ -99,7 +99,7 @@ void DinoBlue::update(float dt, sf::Vector2f playerPos)
 
             if (m_animator) m_animator->play("RUN");
 
-            runSpeed *= 1.5f;
+            runSpeed *= 1.25f;
         }
         else
         {
@@ -110,7 +110,7 @@ void DinoBlue::update(float dt, sf::Vector2f playerPos)
             else
             {
                 if (m_animator) m_animator->play("RUN");
-                runSpeed *= 1.5f;
+                runSpeed *= 1.25f;
             }
         }
 

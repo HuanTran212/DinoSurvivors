@@ -88,7 +88,7 @@ void DinoGreen::update(float dt, sf::Vector2f playerPos)
         if (m_isHurt)
         {
             if (m_animator) m_animator->play("RUN");
-            runSpeed *= 1.1f;
+            runSpeed *= 1.15f;
         }
         else
         {
@@ -99,7 +99,7 @@ void DinoGreen::update(float dt, sf::Vector2f playerPos)
             else
             {
                 if (m_animator) m_animator->play("RUN");
-                runSpeed *= 1.1f;
+                runSpeed *= 1.15f;
             }
         }
 

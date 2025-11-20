@@ -66,9 +66,6 @@ void GameOverState::processInput()
             auto keyEvent = event->getIf<sf::Event::KeyPressed>();
             if (keyEvent && keyEvent->code == sf::Keyboard::Key::Enter)
             {
-                // --- RESET GAME ---
-                // Xóa hết (bao gồm cả GameOver và PlayingState cũ)
-                // Tạo PlayingState mới tinh
                 m_game.replaceAllStates(std::make_unique<PlayingState>(m_game));
             }
         }

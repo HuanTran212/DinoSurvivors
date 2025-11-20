@@ -15,7 +15,7 @@ MainMenuState::MainMenuState(Game& game)
 	sf::Vector2u windowSize = m_game.getWindow().getSize();
 
     m_titleText.setFont(m_font);
-    m_titleText.setString("PacManSurvivors");
+    m_titleText.setString("Dino Survivor");
     m_titleText.setCharacterSize(60);
     m_titleText.setFillColor(sf::Color::Yellow);
     m_titleText.setStyle(sf::Text::Bold);
